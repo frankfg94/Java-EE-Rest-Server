@@ -7,7 +7,7 @@
 package se.m1.model;
 
 /**
- *
+ * Java Bean class for an Employee
  * @author Administrateur
  */
 public class Employee {

@@ -23,7 +23,16 @@
         
     </servlet>
     
-   
+   <servlet>
+        <servlet-name>EmployeesListPageController</servlet-name>
+        <servlet-class>se.m1.ctrl.EmployeesListPageController</servlet-class>
+    </servlet>
+    
+     
+    <servlet-mapping>
+        <servlet-name>EmployeesListPageController</servlet-name>
+        <url-pattern>/EmployeesListPageController</url-pattern>
+    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>LoginPageController</servlet-name>

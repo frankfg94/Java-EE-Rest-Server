@@ -21,13 +21,16 @@ public class DBActions {
 
     public DBActions(String url, String user, String pwd) {
         try {
+            System.out.println("New DB action");
             conn = DriverManager.getConnection(url, user, pwd);
+            System.out.println("breakpoint");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
     }
 
     public Statement getStatement() {
+                        System.out.println("Get Statement"); 
         try {
             stmt = conn.createStatement();
         } catch (SQLException sqle) {
@@ -38,6 +41,7 @@ public class DBActions {
     }
 
     public ResultSet getResultSet(String query) {
+        System.out.println("Get Result Set"); 
         stmt = getStatement();
         try {
             rs = stmt.executeQuery(query);
@@ -49,6 +53,7 @@ public class DBActions {
     }
 
     public ArrayList<User> getUsers() {
+        System.out.println("Get Users"); 
         listUsers = new ArrayList<>();
         rs = getResultSet(QUERY_SEL_CREDENTIALS);
         try {
@@ -66,6 +71,7 @@ public class DBActions {
     }
 
     public ArrayList<Employee> getEmployees() {
+        System.out.println("Get Employees"); 
         listEmployees = new ArrayList<>();
         rs = getResultSet(QUERY_SEL_EMPLOYEES);
         try {
@@ -76,7 +82,11 @@ public class DBActions {
                 emplBean.setAddress(rs.getString("ADRESS"));
                 emplBean.setCity(rs.getString("CITY"));
                 emplBean.setMail(rs.getString("EMAIL"));
-
+                emplBean.setMobilePhone(rs.getString("TELMOB"));
+                emplBean.setProPhone(rs.getString("TELPRO"));
+                emplBean.setHomePhone(rs.getString("TELHOME"));
+                emplBean.setId(rs.getString("ID"));
+                emplBean.setPostalCode(rs.getString("POSTALCODE"));
                 listEmployees.add(emplBean);
             }
         } catch (SQLException e) {

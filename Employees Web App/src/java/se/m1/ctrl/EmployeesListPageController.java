@@ -7,6 +7,7 @@ package se.m1.ctrl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import se.m1.model.User;
 import se.m1.model.DBActions;
+import se.m1.model.Employee;
 import se.m1.utils.Constants;
 import static se.m1.utils.Constants.*;
 
@@ -23,7 +25,7 @@ import static se.m1.utils.Constants.*;
  *
  * @author JAA
  */
-public class LoginPageController extends HttpServlet {
+public class EmployeesListPageController extends HttpServlet {
 
     DBActions dba;
     User userInput;
@@ -32,6 +34,11 @@ public class LoginPageController extends HttpServlet {
     String dbUser="";
     String dbPwd="";
 
+    // TODO : mettre ces variables directement dans EmployeesListPage.jsp
+    final static String DELETE_EMPLOYEE_BUTTON_NAME = "delEmpButton";
+    final static String EDIT_EMPLOYEE_BUTTON_NAME = "detailsEmpButton";
+    final static String ADD_EMPLOYEE_BUTTON_NAME ="addEmpButton";
+      ArrayList<Employee> employees;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,56 +50,46 @@ public class LoginPageController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Properties prop = new Properties();
-        input = getServletContext().getResourceAsStream("/WEB-INF/db.properties");
-        
-        prop.load(input);
-        
-        dbUrl = prop.getProperty("dbUrl");
-        dbUser = prop.getProperty("dbUser");
-        dbPwd = prop.getProperty("dbPwd");
-        
-            
-
-        boolean connFieldEmpty = request.getParameter("loginField").equals("");
-        boolean pwdFieldEmpty = request.getParameter("pwdField").equals("");
-        if (connFieldEmpty || pwdFieldEmpty) {
-            if(connFieldEmpty)
-                request.setAttribute("errKey",Constants.LOGIN_FIELD_EMPTY_MSG);
-            else
-                request.setAttribute("errKey", Constants.PWD_FIELD_EMPTY_MSG);
-            request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
-        } else {
-            dba = new DBActions(dbUrl,dbUser,dbPwd);
-
-            ServletContext ctx = this.getServletContext();
-            ServletConfig conf = this.getServletConfig();
-
-            // Obtenu via le fichier web.xml
-            String loginCtx = ctx.getInitParameter("login");
-            String pwdCtx = conf.getInitParameter("password");
-
-            //Data entered by the user
-            userInput = new User();
-            userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));
-            userInput.setPwd(request.getParameter(FRM_PWD_FIELD));
-
-            //if (dba.checkCredentials(userInput)) {
-            
-            
-            // NULL REFERENCE EXCEPTION POUR L'INSTANT
-            
-            if (loginCtx.equals(userInput.getLogin()) && pwdCtx.equals(userInput.getPwd())) {
-                request.getSession().setAttribute("empList", dba.getEmployees());
-                request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);
-            } else {
-                request.setAttribute("errKey", ERR_MESSAGE);
-                request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
-            }
+       
+       employees = (ArrayList<Employee>)request.getSession().getAttribute("empList");
+        boolean DelButClicked =request.getParameter(DELETE_EMPLOYEE_BUTTON_NAME) != null;
+        boolean EditButClicked = request.getParameter(EDIT_EMPLOYEE_BUTTON_NAME) != null;
+        boolean AddButClicked =  request.getParameter(ADD_EMPLOYEE_BUTTON_NAME) != null;
+       
+        int selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
+        if(DelButClicked)
+        {
+            System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
+            deleteEmployeeFromDatabase(selEmployeeId);
         }
+        else if(EditButClicked)
+        {
+            System.out.println("Edit/Details button clicked");
+            request.setAttribute("selEmployee", employees.get(selEmployeeId));
+            request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
+            return;
+        }
+        else if(AddButClicked)
+        {
+            System.out.println("Add button clicked");
+        }
+        else 
+        {
+            System.out.println("Unknown button clicked");
+        }
+        
+        // On revient sur la page des employes
+        request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
+    // Test
+    private void deleteEmployeeFromDatabase(int empId)
+    {
+        String query = "delete * FROM Employees WHERE ID=" + empId;
+        System.out.println(query);
+        System.out.println("\t Employee : "+ employees.get(empId).getName() + " deleted");
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -131,5 +128,7 @@ public class LoginPageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
 
 }
