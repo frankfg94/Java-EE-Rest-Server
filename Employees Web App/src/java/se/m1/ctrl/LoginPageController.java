@@ -22,7 +22,7 @@ import static se.m1.utils.Constants.*;
  *
  * @author JAA
  */
-public class Controller extends HttpServlet {
+public class LoginPageController extends HttpServlet {
 
     DBActions dba;
     User userInput;
@@ -50,10 +50,10 @@ public class Controller extends HttpServlet {
         
         dbUrl = prop.getProperty("dbUrl");
         dbUser = prop.getProperty("dbUser");
-        dbPwd = prop.getProperty("dbPws");
+        dbPwd = prop.getProperty("dbPwd");
         
         if (request.getParameter("action") == null) {
-            request.getRequestDispatcher(JSP_HOME_PAGE).forward(request, response);
+            request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
         } else {
             dba = new DBActions(dbUrl,dbUser,dbPwd);
 
@@ -70,12 +70,16 @@ public class Controller extends HttpServlet {
             userInput.setPwd(request.getParameter(FRM_PWD_FIELD));
 
             //if (dba.checkCredentials(userInput)) {
+            
+            
+            // NULL REFERENCE EXCEPTION POUR L'INSTANT
+            
             if (loginCtx.equals(userInput.getLogin()) && pwdCtx.equals(userInput.getPwd())) {
                 request.setAttribute("empList", dba.getEmployees());
-                request.getRequestDispatcher(JSP_WELCOME_PAGE).forward(request, response);
+                request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);
             } else {
                 request.setAttribute("errKey", ERR_MESSAGE);
-                request.getRequestDispatcher(JSP_HOME_PAGE).forward(request, response);
+                request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
             }
         }
     }

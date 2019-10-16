@@ -21,7 +21,7 @@
         <h1>  hi</h1>
 
         <%
-            ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("eList");
+            ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
             out.print("<table border='1'>");
             for(Employee emp : employees)
            {
