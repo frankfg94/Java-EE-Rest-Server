@@ -2,10 +2,13 @@ package se.m1.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static se.m1.utils.Constants.*;
 
 /**
@@ -111,6 +114,53 @@ public class DBActions {
             }
         }
         return testCheck;
+    }
+
+    public void SaveEmployee(Employee emp, String id) throws Exception {
+        
+        if(id == null)
+            throw new Exception("Impossible d'utiliser la fonction SaveEmployee si l'identifiant 'id' est null ");
+        
+        try {
+            
+            // Prepared statements augmentent la sécurité
+            String query = "UPDATE EMPLOYEES  SET NAME = ?, FIRSTNAME = ?, TELHOME = ?, TELMOB = ?, TELPRO = ?, ADRESS  = ?, POSTALCODE = ?, CITY = ?, EMAIL = ? WHERE ID = ?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, emp.getName());
+            preparedStmt.setString(2, emp.getFirstname());
+            preparedStmt.setString(3,emp.getHomePhone());
+            preparedStmt.setString(4, emp.getMobilePhone());
+            preparedStmt.setString(5, emp.getProPhone());
+            preparedStmt.setString(6,emp.getAddress());
+            preparedStmt.setString(7,emp.getPostalCode());
+            preparedStmt.setString(8, emp.getCity());
+            preparedStmt.setString(9, emp.getMail());
+            preparedStmt.setString(10, id);
+            preparedStmt.executeUpdate();
+            System.out.println("Datas mises à jour : " + preparedStmt.getUpdateCount());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public void AddEmployee(Employee emp) {
+        try {
+            String query = "INSERT INTO EMPLOYEES(NAME,FIRSTNAME,TELHOME,TELMOB,TELPRO,ADRESS,POSTALCODE,CITY,EMAIL) values(?,?,?,?,?,?,?,?,?)";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, emp.getName());
+            preparedStmt.setString(2, emp.getFirstname());
+            preparedStmt.setString(3,emp.getHomePhone());
+            preparedStmt.setString(4, emp.getMobilePhone());
+            preparedStmt.setString(5, emp.getProPhone());
+            preparedStmt.setString(6,emp.getAddress());
+            preparedStmt.setString(7,emp.getPostalCode());
+            preparedStmt.setString(8, emp.getCity());
+            preparedStmt.setString(9, emp.getMail());
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

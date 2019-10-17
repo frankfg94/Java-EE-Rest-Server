@@ -25,7 +25,7 @@ import static se.m1.utils.Constants.*;
  */
 public class LoginPageController extends HttpServlet {
 
-    DBActions dba;
+    public static DBActions dba;
     User userInput;
     InputStream input;
     String dbUrl="";
@@ -85,6 +85,7 @@ public class LoginPageController extends HttpServlet {
             
             if (loginCtx.equals(userInput.getLogin()) && pwdCtx.equals(userInput.getPwd())) {
                 request.getSession().setAttribute("empList", dba.getEmployees());
+                request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);
                 request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);
             } else {
                 request.setAttribute("errKey", ERR_MESSAGE);

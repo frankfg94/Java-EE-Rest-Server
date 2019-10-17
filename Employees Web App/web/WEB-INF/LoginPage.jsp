@@ -21,8 +21,8 @@
 
         %>
         <form  name ='myform' action='LoginPageController'>
-            Login :<input type='text' name='loginField'><br/>
-            Password :<input type='text' name='pwdField'><br/>
+            Login :<input type='text'  name='loginField'><br/>
+            Password :<input type='password' name='pwdField'><br/>
             <input type='submit' name='action' value='ok'>
         </form>
 

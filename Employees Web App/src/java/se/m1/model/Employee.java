@@ -32,6 +32,8 @@ public class Employee {
     }
 
     public String getName() {
+        if(name == null)
+            return "";
         return name;
     }
 
@@ -80,6 +82,8 @@ public class Employee {
     }
 
     public String getPostalCode() {
+        if(postalCode==null)
+            return "";
         return postalCode;
     }
 

@@ -25,5 +25,8 @@ public class Constants {
     // Employees list file
     public static final String RADIO_EMPLOYEES_LIST_NAME = "selRadioBut";
     public static final String JSP_EMPLOYEES_DETAILS_PAGE = "WEB-INF\\EmployeesDetailsPage.jsp";
+    public static final String SAVE_EMP_DETAILS_BUT_NAME = "saveEmpBut";
+    public static final String CANCEL_EMP_DETAILS_BUT_NAME = "cancelDetailsEmpBut";
+    public static String CREATE_EMP_BUT_NAME = "createEmpBut";
 
 }

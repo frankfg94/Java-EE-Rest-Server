@@ -52,12 +52,18 @@ public class EmployeesListPageController extends HttpServlet {
             throws ServletException, IOException {
        
        employees = (ArrayList<Employee>)request.getSession().getAttribute("empList");
+       String prevPageUrl = (String)request.getSession().getAttribute("previousPageUrl");
+       handleEmployeesListPageActions(request, response);
+    }
+    
+    private void handleEmployeesListPageActions(HttpServletRequest request, HttpServletResponse response) throws ServletException, ServletException, IOException
+    {
+        
+        int selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
         boolean DelButClicked =request.getParameter(DELETE_EMPLOYEE_BUTTON_NAME) != null;
         boolean EditButClicked = request.getParameter(EDIT_EMPLOYEE_BUTTON_NAME) != null;
         boolean AddButClicked =  request.getParameter(ADD_EMPLOYEE_BUTTON_NAME) != null;
-       
-        int selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
-        if(DelButClicked)
+         if(DelButClicked)
         {
             System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
             deleteEmployeeFromDatabase(selEmployeeId);
@@ -66,12 +72,16 @@ public class EmployeesListPageController extends HttpServlet {
         {
             System.out.println("Edit/Details button clicked");
             request.setAttribute("selEmployee", employees.get(selEmployeeId));
+            request.getSession().setAttribute("previousPageUrl",Constants.JSP_EMPLOYEESLIST_PAGE);
             request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
             return;
         }
         else if(AddButClicked)
         {
             System.out.println("Add button clicked");
+            request.getSession().setAttribute("previousPageUrl",Constants.JSP_EMPLOYEESLIST_PAGE);
+            request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
+            return;
         }
         else 
         {
@@ -79,9 +89,16 @@ public class EmployeesListPageController extends HttpServlet {
         }
         
         // On revient sur la page des employes
+        request.getSession().setAttribute("previousPageUrl",Constants.JSP_EMPLOYEESLIST_PAGE);
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
+        private void handleEmployeesDetailsPageActions(HttpServletRequest request, HttpServletResponse response) 
+        {
+              boolean saveButClicked =request.getParameter(Constants.SAVE_EMP_DETAILS_BUT_NAME) != null;
+              boolean cancelButClicked = request.getParameter(Constants.CANCEL_EMP_DETAILS_BUT_NAME) != null;
+              
+        }
     // Test
     private void deleteEmployeeFromDatabase(int empId)
     {
@@ -128,6 +145,10 @@ public class EmployeesListPageController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
+
+
 
 
 
