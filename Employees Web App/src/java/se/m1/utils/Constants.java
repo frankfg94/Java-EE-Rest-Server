@@ -17,6 +17,8 @@ public class Constants {
     public static final String ERR_MESSAGE = "Invalid credentials!";
     public static final String JSP_LOGIN_PAGE = "WEB-INF\\LoginPage.jsp";
     public static final String JSP_EMPLOYEESLIST_PAGE = "WEB-INF\\EmployeesListPage.jsp";
+    public static final String JSP_HOME_PAGE = "WEB-INF/LoginPage.jsp";
+    public static final String JSP_WELCOME_PAGE = "WEB-INF/EmployeesListPage.jsp";
     public static final String FRM_LOGIN_FIELD = "loginField";
     public static final String FRM_PWD_FIELD = "pwdField";
     public static final String LOGIN_FIELD_EMPTY_MSG = "Veuilez remplir l'identifiant de connexion";

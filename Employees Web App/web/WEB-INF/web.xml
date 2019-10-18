@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>
+           Controller
+        </welcome-file>
+    </welcome-file-list>
+        
     <session-config>
         <session-timeout>
             30
@@ -14,10 +21,14 @@
             <param-value>admin</param-value>
         </init-param>
     </servlet>
+    
     <servlet>
         <servlet-name>EmployeesListPageController</servlet-name>
         <servlet-class>se.m1.ctrl.EmployeesListPageController</servlet-class>
     </servlet>
+    
+    
+    
     <servlet-mapping>
         <servlet-name>EmployeesListPageController</servlet-name>
         <url-pattern>/EmployeesListPageController</url-pattern>
@@ -27,18 +38,24 @@
         <servlet-name>EmployeesDetailsPageController</servlet-name>
         <servlet-class>se.m1.ctrl.EmployeesDetailsPageController</servlet-class>
     </servlet>
+    
+    
+    
     <servlet-mapping>
         <servlet-name>EmployeesDetailsPageController</servlet-name>
         <url-pattern>/EmployeesDetailsPageController</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>LoginPageController</servlet-name>
         <url-pattern>/LoginPageController</url-pattern>
     </servlet-mapping>
+    
     <context-param>
         <param-name>login</param-name>
         <param-value>admin</param-value>
     </context-param>
+    
     <welcome-file-list>
         <welcome-file>
         WEB-INF\\LoginPage.jsp
