@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,7 +29,6 @@ import static se.m1.utils.Constants.*;
  */
 public class EmployeesListPageController extends HttpServlet {
 
-    DBActions dba;
     User userInput;
     InputStream input;
     String dbUrl="";
@@ -66,7 +67,14 @@ public class EmployeesListPageController extends HttpServlet {
          if(DelButClicked)
         {
             System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
-            deleteEmployeeFromDatabase(selEmployeeId);
+            request.setAttribute("selEmployee", employees.get(selEmployeeId));
+            try {
+                LoginPageController.dba.DeleteEmployee(employees.get(selEmployeeId), String.valueOf(selEmployeeId));
+                deleteEmployeeFromDatabase(selEmployeeId);
+                employees.remove(selEmployeeId);
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeesListPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(EditButClicked)
         {

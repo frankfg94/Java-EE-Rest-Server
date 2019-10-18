@@ -33,7 +33,7 @@ public class DBActions {
     }
 
     public Statement getStatement() {
-                        System.out.println("Get Statement"); 
+        System.out.println("Get Statement"); 
         try {
             stmt = conn.createStatement();
         } catch (SQLException sqle) {
@@ -116,6 +116,26 @@ public class DBActions {
         return testCheck;
     }
 
+     public void DeleteEmployee(Employee emp, String id) throws Exception {
+        
+        if(id == null)
+            throw new Exception("Impossible d'utiliser la fonction DeleteEmployee si l'identifiant 'id' est null ");
+        
+        try {
+            
+            // Prepared statements augmentent la sécurité
+            String query = "DELETE FROM EMPLOYEES WHERE ID = ?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString(1, id);
+            preparedStmt.executeUpdate();
+            System.out.println("Datas mises à jour : " + preparedStmt.getUpdateCount());
+        } catch (SQLException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
     public void SaveEmployee(Employee emp, String id) throws Exception {
         
         if(id == null)
@@ -136,7 +156,7 @@ public class DBActions {
             preparedStmt.setString(8, emp.getCity());
             preparedStmt.setString(9, emp.getMail());
             preparedStmt.setString(10, id);
-            preparedStmt.executeUpdate();
+            preparedStmt.execute(id);
             System.out.println("Datas mises à jour : " + preparedStmt.getUpdateCount());
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
@@ -144,6 +164,7 @@ public class DBActions {
         
     }
 
+    
     public void AddEmployee(Employee emp) {
         try {
             String query = "INSERT INTO EMPLOYEES(NAME,FIRSTNAME,TELHOME,TELMOB,TELPRO,ADRESS,POSTALCODE,CITY,EMAIL) values(?,?,?,?,?,?,?,?,?)";
