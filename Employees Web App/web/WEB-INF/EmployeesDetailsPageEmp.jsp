@@ -20,6 +20,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+                    <jsp:include page='Navbar.jsp'/>
         <form action="EmployeesDetailsPageController">
             <%
                 // Idée architecture françois : possibilité de parcourir chaque champ peut importe sa valeur et de l'afficher

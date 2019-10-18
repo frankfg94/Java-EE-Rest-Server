@@ -57,10 +57,12 @@ public class EmployeesListPageController extends HttpServlet {
        handleEmployeesListPageActions(request, response);
     }
     
+    int selEmployeeId;
     private void handleEmployeesListPageActions(HttpServletRequest request, HttpServletResponse response) throws ServletException, ServletException, IOException
     {
         
-        int selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
+        if(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME)!= null)
+         selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
         boolean DelButClicked =request.getParameter(DELETE_EMPLOYEE_BUTTON_NAME) != null;
         boolean EditButClicked = request.getParameter(EDIT_EMPLOYEE_BUTTON_NAME) != null;
         boolean AddButClicked =  request.getParameter(ADD_EMPLOYEE_BUTTON_NAME) != null;

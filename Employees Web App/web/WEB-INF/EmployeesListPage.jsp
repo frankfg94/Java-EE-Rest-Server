@@ -20,53 +20,62 @@
         <title>JSP Page</title>
     </head>
     <body>
+            <jsp:include page='Navbar.jsp'/>
         <form action="EmployeesListPageController">
              <h1> Employees List</h1>
             <%
                 ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
-                out.print("<table border='1'>");
-                out.print("<tr>");
-                    out.print("<td>Sél</td>");
-                    out.print("<td>NAME</td>");
-                    out.print("<td>FIRST NAME</td>");
-                    out.print("<td>HOME PHONE</td>");
-                    out.print("<td>MOBILE PHONE</td>");
-                    out.print("<td>WORK PHONE</td>");
-                    out.print("<td>ADDRESS</td>");
-                    out.print("<td>POSTAL CODE</td>");
-                    out.print("<td>CITY</td>");
-                    out.print("<td>EMAIL</td>");
+                if(employees != null && employees.size() != 0)
+                {
+                    out.print("<table border='1'>");
+                    out.print("<tr>");
+                        out.print("<td>Sél</td>");
+                        out.print("<td>NAME</td>");
+                        out.print("<td>FIRST NAME</td>");
+                        out.print("<td>HOME PHONE</td>");
+                        out.print("<td>MOBILE PHONE</td>");
+                        out.print("<td>WORK PHONE</td>");
+                        out.print("<td>ADDRESS</td>");
+                        out.print("<td>POSTAL CODE</td>");
+                        out.print("<td>CITY</td>");
+                        out.print("<td>EMAIL</td>");
 
-                out.print("</tr>");
-                int radioButId = 0;
-                boolean firstLineChecked = false;
-                for(Employee emp : employees)
-               {
-                   
-                   out.print("<tr>");
-                   if(!firstLineChecked)
+                    out.print("</tr>");
+                    int radioButId = 0;
+                    boolean firstLineChecked = false;
+                    for(Employee emp : employees)
                    {
-                     out.print("<td>"+"<input type='radio' value="+radioButId+" checked='checked'  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
-                     firstLineChecked = true;
+
+                       out.print("<tr>");
+                       if(!firstLineChecked)
+                       {
+                         out.print("<td>"+"<input type='radio' value="+radioButId+" checked='checked'  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
+                         firstLineChecked = true;
+                       }
+                       else
+                        out.print("<td>"+"<input type='radio' value="+radioButId+"  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
+                        out.print("<td>"+emp.getName()+"</td>");
+                        out.print("<td>"+emp.getFirstname()+"</td>");  
+                        out.print("<td>"+emp.getHomePhone()+"</td>");   
+                        out.print("<td>"+emp.getMobilePhone()+"</td>");
+                        out.print("<td>"+emp.getProPhone()+"</td>");
+                        out.print("<td>"+emp.getAddress()+"</td>");
+                        out.print("<td>"+emp.getPostalCode()+"</td>");
+                        out.print("<td>"+emp.getCity()+"</td>");
+                        out.print("<td>"+emp.getMail()+"</td>");
+                       out.print("</tr>");
+                       radioButId++;
                    }
-                   else
-                    out.print("<td>"+"<input type='radio' value="+radioButId+"  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
-                    out.print("<td>"+emp.getName()+"</td>");
-                    out.print("<td>"+emp.getFirstname()+"</td>");  
-                    out.print("<td>"+emp.getHomePhone()+"</td>");   
-                    out.print("<td>"+emp.getMobilePhone()+"</td>");
-                    out.print("<td>"+emp.getProPhone()+"</td>");
-                    out.print("<td>"+emp.getAddress()+"</td>");
-                    out.print("<td>"+emp.getPostalCode()+"</td>");
-                    out.print("<td>"+emp.getCity()+"</td>");
-                    out.print("<td>"+emp.getMail()+"</td>");
-                   out.print("</tr>");
-                   radioButId++;
-               }
-                out.print("</table>");
-                out.print("<br/>");
-                out.print("<input type='submit' value='Delete' name='delEmpButton'/>");
-                out.print("<input type='submit' value='Details' name='detailsEmpButton'/>");
+                    out.print("</table>");
+                    out.print("<br/>");
+                    out.print("<input type='submit' value='Delete' name='delEmpButton'/>");
+                    out.print("<input type='submit' value='Details' name='detailsEmpButton'/>");
+                }
+                else 
+                {
+                    out.print("<h2 style='color:red;'>The company doesn't have employees!</h2>");
+                }
+
                 out.print("<input type='submit' value='Add' name='addEmpButton'/>");
 
             %>

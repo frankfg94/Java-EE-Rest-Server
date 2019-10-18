@@ -15,6 +15,9 @@
     <body>
 
         <%
+            // Reinitialisation des paramètres
+            request.setAttribute("isAdmin", false);
+            
             if (request.getAttribute("errKey") != null) {
                 out.print((String) request.getAttribute("errKey"));
             }
