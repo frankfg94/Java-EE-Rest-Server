@@ -72,7 +72,10 @@ public class EmployeesDetailsPageController extends HttpServlet {
               }
               else if(cancelButClicked)
               {
-                  request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
+                  if((boolean)(request.getSession().getAttribute("isAdmin")))
+                    request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
+                  else
+                    request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
               }
               else if (createButClicked)
               {
@@ -122,7 +125,6 @@ public class EmployeesDetailsPageController extends HttpServlet {
        selEmployee.setCity(request.getParameter("empCity"));
        selEmployee.setMail( request.getParameter("empMail"));
        
-
        LoginPageController.dba.AddEmployee(selEmployee);
        
        // Actualise la liste

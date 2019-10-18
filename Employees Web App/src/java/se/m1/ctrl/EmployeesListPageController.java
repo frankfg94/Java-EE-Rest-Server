@@ -73,7 +73,10 @@ public class EmployeesListPageController extends HttpServlet {
             System.out.println("Edit/Details button clicked");
             request.setAttribute("selEmployee", employees.get(selEmployeeId));
             request.getSession().setAttribute("previousPageUrl",Constants.JSP_EMPLOYEESLIST_PAGE);
-            request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
+            if((boolean)request.getSession().getAttribute("isAdmin"))
+                request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
+            else 
+                request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_EMP_PAGE).forward(request, response);
             return;
         }
         else if(AddButClicked)

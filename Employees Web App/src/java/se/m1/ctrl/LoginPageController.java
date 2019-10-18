@@ -70,9 +70,12 @@ public class LoginPageController extends HttpServlet {
             ServletConfig conf = this.getServletConfig();
 
             // Obtenu via le fichier web.xml
-            String loginCtx = ctx.getInitParameter("login");
-            String pwdCtx = conf.getInitParameter("password");
+            String loginAdminCtx = ctx.getInitParameter("loginAdmin");
+            String pwdAdminCtx = conf.getInitParameter("passwordAdmin");
 
+            String loginEmpCtx = ctx.getInitParameter("loginEmp");
+            String pwdEmpCtx = conf.getInitParameter("passwordEmp");
+            
             //Data entered by the user
             userInput = new User();
             userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));
@@ -82,12 +85,20 @@ public class LoginPageController extends HttpServlet {
             
             
             // NULL REFERENCE EXCEPTION POUR L'INSTANT
-            
-            if (loginCtx.equals(userInput.getLogin()) && pwdCtx.equals(userInput.getPwd())) {
+            request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);
+            if (loginAdminCtx.equals(userInput.getLogin()) && pwdAdminCtx.equals(userInput.getPwd())) {
                 request.getSession().setAttribute("empList", dba.getEmployees());
-                request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);
+                request.getSession().setAttribute("isAdmin", true);
                 request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);
-            } else {
+            } 
+            else if(loginEmpCtx.equals(userInput.getLogin()) && pwdEmpCtx.equals(userInput.getPwd()))
+            {
+               request.getSession().setAttribute("empList", dba.getEmployees());
+               request.getSession().setAttribute("isAdmin", false);
+               request.getRequestDispatcher(JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
+            }
+            else
+            {
                 request.setAttribute("errKey", ERR_MESSAGE);
                 request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
             }

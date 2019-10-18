@@ -25,25 +25,7 @@
                 // Idée architecture françois : possibilité de parcourir chaque champ peut importe sa valeur et de l'afficher
                 Employee emp = (Employee)request.getAttribute("selEmployee");                
                 request.getSession().setAttribute("selEmployee", emp);
-                
-                if(emp == null)
-                {
-                      out.print("<h2>Creation of a new Employee </h2>");
-                    out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input name='empName' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input name='empFirstName' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input  name='empHomePhone' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input  name='empMobilePhone' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input  name='empProPhone' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input  name='empGetAddress' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input  name='empPostalCode' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='10' style='display:inline-block' type='text' />");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empMail' maxlength='10'  style='display:inline-block' type='text' />");
-                out.print("<br/>");
-                out.print("<input type='submit' value='Create' name='"+Constants.CREATE_EMP_BUT_NAME+"'/>");
-                out.print("<input type='submit' value='Cancel' name='"+Constants.CANCEL_EMP_DETAILS_BUT_NAME+"'/>");
-                }
-                else 
-                {
+
                       out.print("<h2>Details of Employee : " +  emp.getFirstname()+  " " + emp.getName()+ "</h2>");
                     out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input name='empName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getName()+"'/>");
                     out.print("<br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input name='empFirstName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getFirstname()+"'/>");
@@ -55,10 +37,7 @@
                     out.print("<br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='10' style='display:inline-block' type='text' value='"+emp.getCity()+"'/>");
                     out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empMail' maxlength='10'  style='display:inline-block' type='text' value='"+emp.getMail()+"'/>");
                 out.print("<br/>");
-                out.print("<input type='submit' value='Save' name='"+Constants.SAVE_EMP_DETAILS_BUT_NAME+"'/>");
-                out.print("<input type='submit' value='Cancel' name='"+Constants.CANCEL_EMP_DETAILS_BUT_NAME+"'/>");
-                }
-              
+                out.print("<input type='submit' value='Go Back' name='"+Constants.CANCEL_EMP_DETAILS_BUT_NAME+"'/>");
             %>
         </form>
        

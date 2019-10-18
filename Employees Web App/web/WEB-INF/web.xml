@@ -10,8 +10,12 @@
         <servlet-name>LoginPageController</servlet-name>
         <servlet-class>se.m1.ctrl.LoginPageController</servlet-class>
         <init-param>
-            <param-name>password</param-name>
+            <param-name>passwordAdmin</param-name>
             <param-value>admin</param-value>
+        </init-param>
+        <init-param>
+            <param-name>passwordEmp</param-name>
+            <param-value>empl</param-value>
         </init-param>
     </servlet>
     <servlet>
@@ -35,10 +39,18 @@
         <servlet-name>LoginPageController</servlet-name>
         <url-pattern>/LoginPageController</url-pattern>
     </servlet-mapping>
+    
+    <!-- Identifiants de connexion -->
     <context-param>
-        <param-name>login</param-name>
+        <param-name>loginAdmin</param-name>
         <param-value>admin</param-value>
     </context-param>
+    
+    <context-param>
+        <param-name>loginEmp</param-name>
+        <param-value>empl</param-value>
+    </context-param>
+    
     <welcome-file-list>
         <welcome-file>
         WEB-INF\\LoginPage.jsp
