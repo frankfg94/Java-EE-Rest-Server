@@ -20,7 +20,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-                    <jsp:include page='Navbar.jsp'/>
+        <jsp:include page='Navbar.jsp'/>
         <form action="EmployeesListPageController">
              <h1> Employees List</h1>
             <%

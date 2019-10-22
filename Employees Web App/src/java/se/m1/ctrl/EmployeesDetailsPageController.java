@@ -103,7 +103,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
        selEmployee.setMobilePhone(request.getParameter("empMobilePhone"));
        selEmployee.setProPhone(request.getParameter("empProPhone"));
        selEmployee.setAddress(request.getParameter("empGetAddress"));
-       selEmployee.setPostalCode(request.getParameter("empPostalcode"));
+       selEmployee.setPostalCode(request.getParameter("empPostalCode"));
        selEmployee.setCity(request.getParameter("empCity"));
        selEmployee.setMail( request.getParameter("empMail"));
        
@@ -121,7 +121,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
        selEmployee.setMobilePhone(request.getParameter("empMobilePhone"));
        selEmployee.setProPhone(request.getParameter("empProPhone"));
        selEmployee.setAddress(request.getParameter("empGetAddress"));
-       selEmployee.setPostalCode(request.getParameter("empPostalcode"));
+       selEmployee.setPostalCode(request.getParameter("empPostalCode"));
        selEmployee.setCity(request.getParameter("empCity"));
        selEmployee.setMail( request.getParameter("empMail"));
        

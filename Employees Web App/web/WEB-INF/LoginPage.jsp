@@ -21,9 +21,8 @@
             if (request.getAttribute("errKey") != null) {
                 out.print((String) request.getAttribute("errKey"));
             }
-
         %>
-        <form  name ='myform' action='LoginPageController'>
+        <form  name ='myform' action='LoginPageController' method="POST">
             Login :<input type='text' placeholder="Login"  name='loginField'><br/>
             Password :<input type='password' placeholder="Password" name='pwdField'><br/>
             <input type='submit' name='action' value='ok'>

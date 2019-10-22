@@ -82,7 +82,7 @@ public class LoginPageController extends HttpServlet {
             userInput.setPwd(request.getParameter(FRM_PWD_FIELD));
 
             //if (dba.checkCredentials(userInput)) {
-            
+            request.getSession().setAttribute("username", userInput.getLogin());
             
             // NULL REFERENCE EXCEPTION POUR L'INSTANT
             request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);

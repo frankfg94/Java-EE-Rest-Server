@@ -21,7 +21,7 @@
     </head>
     <body>
                     <jsp:include page='Navbar.jsp'/>
-        <form action="EmployeesDetailsPageController">
+        <form action="EmployeesDetailsPageController" method="POST">
             <%
                 // Idée architecture françois : possibilité de parcourir chaque champ peut importe sa valeur et de l'afficher
                 Employee emp = (Employee)request.getAttribute("selEmployee");                
