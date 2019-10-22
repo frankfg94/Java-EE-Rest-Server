@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
@@ -39,7 +40,7 @@ public class EmployeesListPageController extends HttpServlet {
     final static String DELETE_EMPLOYEE_BUTTON_NAME = "delEmpButton";
     final static String EDIT_EMPLOYEE_BUTTON_NAME = "detailsEmpButton";
     final static String ADD_EMPLOYEE_BUTTON_NAME ="addEmpButton";
-      ArrayList<Employee> employees;
+      TreeMap<Integer,Employee> employees;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,7 +53,7 @@ public class EmployeesListPageController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-       employees = (ArrayList<Employee>)request.getSession().getAttribute("empList");
+       employees = (TreeMap<Integer,Employee>)request.getSession().getAttribute("empList");
        String prevPageUrl = (String)request.getSession().getAttribute("previousPageUrl");
        handleEmployeesListPageActions(request, response);
     }
@@ -62,8 +63,8 @@ public class EmployeesListPageController extends HttpServlet {
     {
         
         if(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME)!= null)
-         selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
-        boolean DelButClicked =request.getParameter(DELETE_EMPLOYEE_BUTTON_NAME) != null;
+            selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
+        boolean DelButClicked = request.getParameter(DELETE_EMPLOYEE_BUTTON_NAME) != null;
         boolean EditButClicked = request.getParameter(EDIT_EMPLOYEE_BUTTON_NAME) != null;
         boolean AddButClicked =  request.getParameter(ADD_EMPLOYEE_BUTTON_NAME) != null;
          if(DelButClicked)
@@ -71,8 +72,7 @@ public class EmployeesListPageController extends HttpServlet {
             System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
             request.setAttribute("selEmployee", employees.get(selEmployeeId));
             try {
-                LoginPageController.dba.DeleteEmployee(employees.get(selEmployeeId), String.valueOf(selEmployeeId));
-                deleteEmployeeFromDatabase(selEmployeeId);
+                LoginPageController.dba.DeleteEmployee(employees.get(selEmployeeId),selEmployeeId);
                 employees.remove(selEmployeeId);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeesListPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,13 +112,6 @@ public class EmployeesListPageController extends HttpServlet {
               boolean cancelButClicked = request.getParameter(Constants.CANCEL_EMP_DETAILS_BUT_NAME) != null;
               
         }
-    // Test
-    private void deleteEmployeeFromDatabase(int empId)
-    {
-        String query = "delete * FROM Employees WHERE ID=" + empId;
-        System.out.println(query);
-        System.out.println("\t Employee : "+ employees.get(empId).getName() + " deleted");
-    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -4,6 +4,7 @@
     Author     : JAA
 --%>
 
+<%@page import="java.util.TreeMap"%>
 <%@page import="se.m1.utils.Constants"%>
 <!-- Valable uniquement pour la V1 du rendu (car pas le droit au code dans les JSPs) -->
 
@@ -24,7 +25,7 @@
         <form action="EmployeesListPageController">
              <h1> Employees List</h1>
             <%
-                ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
+                TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
                 out.print("<h2>Employees List (Read Only)</h2>");
                 out.print("<table border='1'>");
                 out.print("<tr>");
@@ -40,19 +41,19 @@
                     out.print("<td>EMAIL</td>");
 
                 out.print("</tr>");
-                int radioButId = 0;
+
                 boolean firstLineChecked = false;
-                for(Employee emp : employees)
+                for(int key: employees.keySet())
                {
-                   
+                   Employee emp = employees.get(key);
                    out.print("<tr>");
                    if(!firstLineChecked)
                    {
-                     out.print("<td>"+"<input type='radio' value="+radioButId+" checked='checked'  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
+                     out.print("<td>"+"<input type='radio' value="+key+" checked='checked'  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
                      firstLineChecked = true;
                    }
                    else
-                    out.print("<td>"+"<input type='radio' value="+radioButId+"  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
+                    out.print("<td>"+"<input type='radio' value="+key+"  name="+Constants.RADIO_EMPLOYEES_LIST_NAME+">"+"</td>");
                     out.print("<td>"+emp.getName()+"</td>");
                     out.print("<td>"+emp.getFirstname()+"</td>");  
                     out.print("<td>"+emp.getHomePhone()+"</td>");   
@@ -63,7 +64,6 @@
                     out.print("<td>"+emp.getCity()+"</td>");
                     out.print("<td>"+emp.getMail()+"</td>");
                    out.print("</tr>");
-                   radioButId++;
                }
                 out.print("</table>");
                 out.print("<br/>");

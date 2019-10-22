@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static se.m1.utils.Constants.*;
@@ -20,7 +21,7 @@ public class DBActions {
     Statement stmt;
     ResultSet rs;
     ArrayList<User> listUsers;
-    ArrayList<Employee> listEmployees;
+    TreeMap<Integer,Employee> listEmployees;
 
     public DBActions(String url, String user, String pwd) {
         try {
@@ -73,9 +74,9 @@ public class DBActions {
         return listUsers;
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public TreeMap<Integer,Employee> getEmployees() {
         System.out.println("Get Employees"); 
-        listEmployees = new ArrayList<>();
+        listEmployees = new TreeMap<Integer,Employee>();
         rs = getResultSet(QUERY_SEL_EMPLOYEES);
         try {
             while (rs.next()) {
@@ -88,9 +89,9 @@ public class DBActions {
                 emplBean.setMobilePhone(rs.getString("TELMOB"));
                 emplBean.setProPhone(rs.getString("TELPRO"));
                 emplBean.setHomePhone(rs.getString("TELHOME"));
-                emplBean.setId(rs.getString("ID"));
+                emplBean.setId(rs.getInt("ID"));
                 emplBean.setPostalCode(rs.getString("POSTALCODE"));
-                listEmployees.add(emplBean);
+                listEmployees.put(emplBean.getId(),emplBean);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -116,18 +117,15 @@ public class DBActions {
         return testCheck;
     }
 
-     public void DeleteEmployee(Employee emp, String id) throws Exception {
-        
-        if(id == null)
-            throw new Exception("Impossible d'utiliser la fonction DeleteEmployee si l'identifiant 'id' est null ");
+     public void DeleteEmployee(Employee emp, int id) throws Exception {
         
         try {
             
             // Prepared statements augmentent la sécurité
             String query = "DELETE FROM EMPLOYEES WHERE ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setString(1, id);
-            preparedStmt.executeUpdate();
+            preparedStmt.setInt(1, id);
+            preparedStmt.execute();
             System.out.println("Datas mises à jour : " + preparedStmt.getUpdateCount());
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,10 +134,8 @@ public class DBActions {
     }
     
     
-    public void SaveEmployee(Employee emp, String id) throws Exception {
+    public void SaveEmployee(Employee emp, int id) throws Exception {
         
-        if(id == null)
-            throw new Exception("Impossible d'utiliser la fonction SaveEmployee si l'identifiant 'id' est null ");
         
         try {
             
@@ -155,8 +151,8 @@ public class DBActions {
             preparedStmt.setString(7,emp.getPostalCode());
             preparedStmt.setString(8, emp.getCity());
             preparedStmt.setString(9, emp.getMail());
-            preparedStmt.setString(10, id);
-            preparedStmt.execute(id);
+            preparedStmt.setInt(10, id);
+            preparedStmt.execute();
             System.out.println("Datas mises à jour : " + preparedStmt.getUpdateCount());
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
