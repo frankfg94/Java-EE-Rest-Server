@@ -20,10 +20,10 @@
         <title>Disconnected</title>
     </head>
     <body>
-        <form action="NavbarController">
+        <form action="Controller">
             <h1>Goodbye!</h1>
             <h2>Your disconnection is sucessful</h2>
-            <input type="submit" name="goToLoginPageBut" value="Go to the Login Page"/>
+            <input type="submit" name="action" value="Go to the Login Page"/>
         </form>
     </body>
 </html>

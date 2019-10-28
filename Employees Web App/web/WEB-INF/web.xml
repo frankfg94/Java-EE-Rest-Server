@@ -7,8 +7,8 @@
     </session-config>
     <!-- On fait ici appel aux servlets pour notre V1 -->
     <servlet>
-        <servlet-name>LoginPageController</servlet-name>
-        <servlet-class>se.m1.ctrl.LoginPageController</servlet-class>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>se.m1.ctrl.Controller</servlet-class>
         <init-param>
             <param-name>passwordAdmin</param-name>
             <param-value>admin</param-value>
@@ -18,7 +18,7 @@
             <param-value>empl</param-value>
         </init-param>
     </servlet>
-    
+   <!-- 
     <servlet>
         <servlet-name>EmployeesListPageController</servlet-name>
         <servlet-class>se.m1.ctrl.EmployeesListPageController</servlet-class>
@@ -46,12 +46,13 @@
         <url-pattern>/NavbarController</url-pattern>
     </servlet-mapping>
 
-    
+    -->
     
     <servlet-mapping>
-        <servlet-name>LoginPageController</servlet-name>
-        <url-pattern>/LoginPageController</url-pattern>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
+    
     
     <!-- Identifiants de connexion -->
     <context-param>
@@ -65,8 +66,6 @@
     </context-param>
 
     <welcome-file-list>
-        <welcome-file>
-        WEB-INF\\LoginPage.jsp
-        </welcome-file>
+        <welcome-file>WEB-INF\\LoginPage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

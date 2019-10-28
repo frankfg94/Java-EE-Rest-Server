@@ -29,9 +29,9 @@ public class Constants {
     public static final String RADIO_EMPLOYEES_LIST_NAME = "selRadioBut";
     public static final String JSP_EMPLOYEES_DETAILS_PAGE = "WEB-INF\\EmployeesDetailsPage.jsp";
     public static final String JSP_EMPLOYEES_DETAILS_EMP_PAGE = "WEB-INF\\EmployeesDetailsPageEmp.jsp";
-    public static final String SAVE_EMP_DETAILS_BUT_NAME = "saveEmpBut";
-    public static final String CANCEL_EMP_DETAILS_BUT_NAME = "cancelDetailsEmpBut";
-    public static final String CREATE_EMP_BUT_NAME = "createEmpBut";
+    //public static final String SAVE_EMP_DETAILS_BUT_NAME = "saveEmpBut";
+    //public static final String CANCEL_EMP_DETAILS_BUT_NAME = "cancelDetailsEmpBut";
+  //  public static final String CREATE_EMP_BUT_NAME = "createEmpBut";
     public static final String JSP_GOODBYE_PAGE = "WEB-INF\\GoodbyePage.jsp";
     
 

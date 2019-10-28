@@ -22,7 +22,7 @@
     </head>
     <body>
         <jsp:include page='Navbar.jsp'/>
-        <form action="EmployeesListPageController">
+        <form action="Controller">
              <h1> Employees List</h1>
             <%
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
@@ -67,7 +67,7 @@
                }
                 out.print("</table>");
                 out.print("<br/>");
-                out.print("<input type='submit' value='Details' name='detailsEmpButton'/>");
+                out.print("<input type='submit' value='Details' name='action'/>");
             %>
         </form>
        

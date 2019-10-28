@@ -22,9 +22,10 @@
     </head>
     <body>
             <jsp:include page='Navbar.jsp'/>
-        <form action="EmployeesListPageController">
+            <form action="Controller" method="POST">
              <h1> Employees List</h1>
             <%
+                request.setAttribute("state", "AdminListPage");
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
               //  ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
                 if(employees != null && employees.size() != 0)
@@ -68,15 +69,15 @@
                    }
                     out.print("</table>");
                     out.print("<br/>");
-                    out.print("<input type='submit' value='Delete' name='delEmpButton'/>");
-                    out.print("<input type='submit' value='Details' name='detailsEmpButton'/>");
+                    out.print("<input type='submit' value='Delete' name='action'/>");
+                    out.print("<input type='submit' value='Details' name='action'/>");
                 }
                 else 
                 {
                     out.print("<h2 style='color:red;'>The company doesn't have employees!</h2>");
                 }
 
-                out.print("<input type='submit' value='Add' name='addEmpButton'/>");
+                out.print("<input type='submit' value='Add' name='action'/>");
 
             %>
         </form>

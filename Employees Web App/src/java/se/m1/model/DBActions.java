@@ -134,7 +134,7 @@ public class DBActions {
     }
     
     
-    public void SaveEmployee(Employee emp, int id) throws Exception {
+    public void SaveEmployee(Employee emp, int id){
         
         
         try {
