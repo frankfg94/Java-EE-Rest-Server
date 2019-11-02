@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 20 sept. 2019, 09:31:27
-    Author     : JAA
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,15 +9,18 @@
     <body>
 
         <%
+            // Reinitialisation des paramètres
+            request.setAttribute("isAdmin", false);
+            request.setAttribute("state", "loginAttempt");
+
             if (request.getAttribute("errKey") != null) {
                 out.print((String) request.getAttribute("errKey"));
             }
-
         %>
-        <form  name ='myform' action='controller.jsp'>
-            Login :<input type='text' name='loginField'><br/>
-            Password :<input type='text' name='pwdField'><br/>
-            <input type='submit' name='ok' value='ok'>
+        <form  name ='myform' action='Controller' method="POST">
+            Login :<input type='text' placeholder="Login"  name='loginField'><br/>
+            Password :<input type='password' placeholder="Password" name='pwdField'><br/>
+            <input type='submit' name='action' value='Connect'>
         </form>
 
 
