@@ -35,6 +35,7 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
         super(Users.class);
     }
 
+
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

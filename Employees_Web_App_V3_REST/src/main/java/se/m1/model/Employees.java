@@ -57,17 +57,14 @@ public class Employees implements Serializable {
     @Column(name = "FIRSTNAME")
     private String firstname;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "TELHOME")
     private String telhome;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "TELMOB")
     private String telmob;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "TELPRO")
     private String telpro;
@@ -77,7 +74,6 @@ public class Employees implements Serializable {
     @Column(name = "ADRESS")
     private String adress;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 5)
     @Column(name = "POSTALCODE")
     private String postalcode;
@@ -146,6 +142,8 @@ public class Employees implements Serializable {
     }
 
     public String getTelmob() {
+        if(telmob==null)
+            return "";
         return telmob;
     }
 

@@ -63,7 +63,7 @@ public class EmployeesListPageController extends HttpServlet {
             System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
             request.getSession().setAttribute("selEmployee", employees.get(selEmployeeId));
             try {
-                 LoginPageController.instance.empSB.RemoveEmployee(employees.get(selEmployeeId));
+                 LoginPageController.dba.deleteEmployee(employees.get(selEmployeeId));
                 employees.remove(selEmployeeId);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeesListPageController.class.getName()).log(Level.SEVERE, null, ex);

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import se.m1.beans.EmployeesSB;
 import se.m1.beans.UsersSB;
-import se.m1.model.DBActionsMySql;
+import se.m1.model.DBActionsREST;
 import se.m1.model.Employees;
 import se.m1.model.Users;
 import se.m1.utils.Constants;
@@ -29,7 +29,7 @@ import static se.m1.utils.Constants.*;
 
 public class LoginPageController extends HttpServlet {
 
-    public static DBActionsMySql dba;
+    public static DBActionsREST dba;
     static LoginPageController instance;
     Users userInput;
     InputStream input;
@@ -42,6 +42,7 @@ public class LoginPageController extends HttpServlet {
     
     @EJB
     public  EmployeesSB empSB;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +60,7 @@ public class LoginPageController extends HttpServlet {
 
 
         if(instance == null)
-        instance = this;
+            instance = this;
         
         Properties prop = new Properties();
         input = getServletContext().getResourceAsStream("/WEB-INF/db.properties");
@@ -77,7 +78,7 @@ public class LoginPageController extends HttpServlet {
                 request.setAttribute("errKey", Constants.PWD_FIELD_EMPTY_MSG);
             request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
         } else {
-           // dba = new DBActionsMySql(dbUrl,dbUser,dbPwd);
+            dba = new DBActionsREST(dbUrl,dbUser,dbPwd,empSB);
 
             ServletContext ctx = this.getServletContext();
             ServletConfig conf = this.getServletConfig();
@@ -99,7 +100,8 @@ public class LoginPageController extends HttpServlet {
 
             request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);
             if (loginAdminCtx.equals(userInput.getLogin()) && pwdAdminCtx.equals(userInput.getPwd())) {
-               TreeMap<Integer, Employees> emps =  empSB.getAllEmployeesDict();
+               //TreeMap<Integer, Employees> emps =  empSB.getAllEmployeesDict();
+               TreeMap<Integer, Employees> emps =  dba.getAllEmployees();
                request.getSession().setAttribute("empList",emps );
                ArrayList<Integer> ints = new ArrayList<Integer>();
                ints.addAll(emps.keySet());
@@ -109,8 +111,9 @@ public class LoginPageController extends HttpServlet {
             } 
             else if(loginEmpCtx.equals(userInput.getLogin()) && pwdEmpCtx.equals(userInput.getPwd()))
             {
-               TreeMap<Integer, Employees> emps =  empSB.getAllEmployeesDict();
-               request.getSession().setAttribute("emp   List",emps );
+             //  TreeMap<Integer, Employees> emps =  empSB.getAllEmployeesDict();
+             TreeMap<Integer, Employees> emps =  dba.getAllEmployees();
+                request.getSession().setAttribute("emp   List",emps );
                ArrayList<Integer> ints = new ArrayList<Integer>();
                ints.addAll(emps.keySet());
                request.getSession().setAttribute("empKeys",ints);

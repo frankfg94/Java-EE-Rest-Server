@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import se.m1.model.Users;
-import se.m1.model.DBActionsMySql;
+import se.m1.model.DBActionsREST;
 import se.m1.model.Employees;
 import se.m1.utils.Constants;
 import static se.m1.utils.Constants.*;
@@ -117,43 +117,39 @@ public class EmployeesDetailsPageController extends HttpServlet {
             System.out.println("Employee is NULL, can't save it");
         
        selEmployee.setName( request.getParameter("empName"));
-       selEmployee.setFirstname(request.getParameter("empFirstName"));
-       selEmployee.setTelhome(request.getParameter("empHomePhone"));
-       selEmployee.setTelhome(request.getParameter("empMobilePhone"));
-       selEmployee.setTelpro(request.getParameter("empProPhone"));
-       selEmployee.setAdress(request.getParameter("empGetAddress"));
+       selEmployee.setFirstname(request.getParameter("empFirstname"));
+       selEmployee.setTelhome(request.getParameter("empTelhome"));
+       selEmployee.setTelhome(request.getParameter("empTelmob"));
+       selEmployee.setTelpro(request.getParameter("empTelpro"));
+       selEmployee.setAdress(request.getParameter("empAdress"));
        selEmployee.setPostalcode(request.getParameter("empPostalcode"));
        selEmployee.setCity(request.getParameter("empCity"));
-       selEmployee.setEmail(request.getParameter("empMail"));
+       selEmployee.setEmail(request.getParameter("empEmail"));
        
        if(LoginPageController.dba == null)
             System.out.println("null");
-       LoginPageController.instance.empSB.EditEmployee(selEmployee);
+       LoginPageController.dba.editEmployee(selEmployee);
         System.out.println("Employee Update Done");
     }
     
         private void addNewEmployee(HttpServletRequest request) {
          
-       Employees employeeFromForm = new Employees();
+       Employees emp = new Employees();
         
-       employeeFromForm.setName( request.getParameter("empName"));
-       employeeFromForm.setFirstname(request.getParameter("empFirstname"));
-       employeeFromForm.setTelhome(request.getParameter("empTelhome"));
-       employeeFromForm.setTelhome(request.getParameter("empTelmob"));
-       employeeFromForm.setTelpro(request.getParameter("empTelpro"));
-       employeeFromForm.setAdress(request.getParameter("empAdress"));
-       employeeFromForm.setPostalcode(request.getParameter("empPostalcode"));
-       employeeFromForm.setCity(request.getParameter("empCity"));
-       employeeFromForm.setEmail(request.getParameter("empEmail"));
+       emp.setName( request.getParameter("empName"));
+       emp.setFirstname(request.getParameter("empFirstname"));
+       emp.setTelhome(request.getParameter("empTelhome"));
+       emp.setTelhome(request.getParameter("empTelmob"));
+       emp.setTelpro(request.getParameter("empTelpro"));
+       emp.setAdress(request.getParameter("empAdress"));
+       emp.setPostalcode(request.getParameter("empPostalcode"));
+       emp.setCity(request.getParameter("empCity"));
+       emp.setEmail(request.getParameter("empEmail"));
        
-                       LoginPageController.instance.empSB.AddEmployee(employeeFromForm);
-
-        
-    
+       LoginPageController.dba.insertEmployee(emp);
        
        // Actualise la liste
-       request.getSession().setAttribute("empList", LoginPageController.instance.empSB.getAllEmployeesDict());
-       System.out.println("Employee Added to the Database");
+       request.getSession().setAttribute("empList", LoginPageController.dba.getAllEmployees());
     }
 
 
