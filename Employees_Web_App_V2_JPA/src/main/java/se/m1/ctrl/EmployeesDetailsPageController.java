@@ -120,13 +120,13 @@ public class EmployeesDetailsPageController extends HttpServlet {
         
        selEmployee.setName( request.getParameter("empName"));
        selEmployee.setFirstname(request.getParameter("empFirstName"));
-       selEmployee.setTelhome(request.getParameter("empHomePhone"));
-       selEmployee.setTelhome(request.getParameter("empMobilePhone"));
-       selEmployee.setTelpro(request.getParameter("empProPhone"));
-       selEmployee.setAdress(request.getParameter("empGetAddress"));
+       selEmployee.setTelhome(request.getParameter("empTelhome"));
+       selEmployee.setTelhome(request.getParameter("empTelmob"));
+       selEmployee.setTelpro(request.getParameter("empTelpro"));
+       selEmployee.setAdress(request.getParameter("empAdress"));
        selEmployee.setPostalcode(request.getParameter("empPostalcode"));
        selEmployee.setCity(request.getParameter("empCity"));
-       selEmployee.setEmail(request.getParameter("empMail"));
+       selEmployee.setEmail(request.getParameter("empEmail"));
        
        if(LoginPageController.dba == null)
             System.out.println("null");
@@ -137,15 +137,17 @@ public class EmployeesDetailsPageController extends HttpServlet {
         private void addNewEmployee(HttpServletRequest request) {
          
        Employees employeeFromForm = new Employees();
-        
+       
        employeeFromForm.setName( request.getParameter("empName"));
        employeeFromForm.setFirstname(request.getParameter("empFirstname"));
        employeeFromForm.setTelhome(request.getParameter("empTelhome"));
-       employeeFromForm.setTelhome(request.getParameter("empTelmob"));
+       employeeFromForm.setTelmob(request.getParameter("empTelmob"));
        employeeFromForm.setTelpro(request.getParameter("empTelpro"));
        employeeFromForm.setAdress(request.getParameter("empAdress"));
        employeeFromForm.setPostalcode(request.getParameter("empPostalcode"));
        employeeFromForm.setCity(request.getParameter("empCity"));
+       String s = request.getParameter("empTelmob");
+            System.out.println(s);
        employeeFromForm.setEmail(request.getParameter("empEmail"));
        
                        LoginPageController.instance.empSB.AddEmployee(employeeFromForm);
