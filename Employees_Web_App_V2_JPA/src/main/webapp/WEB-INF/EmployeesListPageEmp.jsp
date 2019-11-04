@@ -24,7 +24,7 @@
     <body>
             
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
-        <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME  %>" />
+        <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME%>" />
         <jsp:include page='Navbar.jsp'/>
         <form action="EmployeesListPageController" method="POST">
              <h1> Employees List</h1>

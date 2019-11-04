@@ -119,7 +119,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
        selEmployee.setName( request.getParameter("empName"));
        selEmployee.setFirstname(request.getParameter("empFirstname"));
        selEmployee.setTelhome(request.getParameter("empTelhome"));
-       selEmployee.setTelhome(request.getParameter("empTelmob"));
+       selEmployee.setTelmob(request.getParameter("empTelmob"));
        selEmployee.setTelpro(request.getParameter("empTelpro"));
        selEmployee.setAdress(request.getParameter("empAdress"));
        selEmployee.setPostalcode(request.getParameter("empPostalcode"));

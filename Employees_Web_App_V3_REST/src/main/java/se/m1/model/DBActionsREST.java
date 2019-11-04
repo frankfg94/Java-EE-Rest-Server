@@ -43,7 +43,7 @@ public class DBActionsREST {
     public final String EMPLOYEES_REL_URL = "/se.m1.model.employees";
     
     // Active le mode rest à true, et le mode jpa à false pour le système CRUD (les appels URL fonctionneront dans tous les cas)
-    public boolean REST_ONLY = true;
+    public boolean REST_ONLY = false;
     
     
     Connection conn;
@@ -54,6 +54,7 @@ public class DBActionsREST {
     private final EmployeesSB empSB;
     public DBActionsREST(String url, String user, String pwd, EmployeesSB empSB) {
         this.empSB = empSB;
+        System.out.println("Starting in mode REST : " + REST_ONLY);
 //        try {
 //            System.out.println("New DB action");
 //            conn = DriverManager.getConnection(url, user, pwd);

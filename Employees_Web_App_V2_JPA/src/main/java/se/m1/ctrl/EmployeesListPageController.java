@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import se.m1.model.Employees;
 import se.m1.utils.Constants;
 
-/**
- *
- * @author JAA
- */
 public class EmployeesListPageController extends HttpServlet {
 
     InputStream input;

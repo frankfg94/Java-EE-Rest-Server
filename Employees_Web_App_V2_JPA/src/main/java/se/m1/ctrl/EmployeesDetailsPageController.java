@@ -120,7 +120,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
         
        selEmployee.setName( request.getParameter("empName"));
        selEmployee.setFirstname(request.getParameter("empFirstName"));
-       selEmployee.setTelhome(request.getParameter("empTelhome"));
+       selEmployee.setTelmob(request.getParameter("empTelhome"));
        selEmployee.setTelhome(request.getParameter("empTelmob"));
        selEmployee.setTelpro(request.getParameter("empTelpro"));
        selEmployee.setAdress(request.getParameter("empAdress"));
@@ -149,11 +149,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
        String s = request.getParameter("empTelmob");
             System.out.println(s);
        employeeFromForm.setEmail(request.getParameter("empEmail"));
-       
-                       LoginPageController.instance.empSB.AddEmployee(employeeFromForm);
-
-        
-    
+       LoginPageController.instance.empSB.AddEmployee(employeeFromForm);    
        
        // Actualise la liste
        request.getSession().setAttribute("empList", LoginPageController.instance.empSB.getAllEmployeesDict());
