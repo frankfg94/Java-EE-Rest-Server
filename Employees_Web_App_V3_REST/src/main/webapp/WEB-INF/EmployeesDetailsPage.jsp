@@ -9,7 +9,6 @@
 
 <%@page import="se.m1.model.Employees"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="se.m1.model.DBActionsMySql"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="se.m1.model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,14 +17,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Employee Details</title>
     </head>
     <body>
                     <jsp:include page='Navbar.jsp'/>
-                    <form action="EmployeesDetailsPageController" method="POST">
+                    <form action="Controller" method="POST">
             
                         <c:set var="empOld" value="${sessionScope.selEmployee}" />
                 <c:set var="emp" value="${empOld}" scope="request" />
+                
 
                 <c:choose>
                     <c:when test="${empty emp}">
@@ -40,8 +40,8 @@
                             <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='10' style='display:inline-block' type='text' />
                             <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empEmail' maxlength='10'  style='display:inline-block' type='text' />
                         <br/>
-                        <input type='submit' value='Create' name="<%=Constants.CREATE_EMP_BUT_NAME %>"/>
-                        <input type='submit' value='Cancel' name="<%=Constants.CANCEL_EMP_DETAILS_BUT_NAME %>"/>
+                        <input type='submit' value='Create' name="action"/>
+                        <input type='submit' value='Cancel' name="action"/>
                     </c:when>
 
                     <c:otherwise>
@@ -56,8 +56,8 @@
                                 <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='10' style='display:inline-block' type='text' value="${emp.getCity()}"/>
                                 <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empEmail' maxlength='10'  style='display:inline-block' type='text' value="${emp.getEmail()}"/>
                             <br/>
-                            <input type='submit' value='Save' name="<%=Constants.SAVE_EMP_DETAILS_BUT_NAME %>"/>
-                            <input type='submit' value='Cancel' name="<%=Constants.CANCEL_EMP_DETAILS_BUT_NAME %>"/>
+                            <input type='submit' value='Save' name="action"/>
+                            <input type='submit' value='Cancel' name="action"/>
 
                     </c:otherwise>
                 </c:choose>

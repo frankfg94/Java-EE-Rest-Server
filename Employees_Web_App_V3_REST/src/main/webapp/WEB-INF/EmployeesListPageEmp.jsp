@@ -10,7 +10,6 @@
 
 <%@page import="se.m1.model.Employees"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="se.m1.model.DBActionsMySql"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="se.m1.model.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,11 +21,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-            
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
         <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME  %>" />
         <jsp:include page='Navbar.jsp'/>
-        <form action="EmployeesListPageController" method="POST">
+        <form action="Controller" method="POST">
              <h1> Employees List (Read Only) </h1>
              <c:set var="employees" value="${sessionScope.empList}"  />
              <c:set var="empKeys" value ="${sessionScope.empKeys}" />
@@ -72,7 +70,7 @@
 
                    </table>
                    <br/>
-                   <input type='submit' value='Details' name='detailsEmpButton'/>
+                   <input type='submit' value='Details' name='action'/>
 
                  </c:when>
                  <c:otherwise>

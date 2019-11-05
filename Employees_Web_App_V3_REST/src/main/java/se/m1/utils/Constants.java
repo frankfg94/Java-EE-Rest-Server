@@ -12,6 +12,11 @@ package se.m1.utils;
 public class Constants {
 
 
+    
+    //Files
+    public static final String FILE_PROPERTIES_DB_PATH = "/WEB-INF/db.properties";
+    
+    // JSPS
     public static final String QUERY_SEL_CREDENTIALS = "SELECT * from CREDENTIALS";
     public static final String QUERY_SEL_EMPLOYEES = "SELECT * from EMPLOYEES";
     public static final String ERR_MESSAGE = "Invalid credentials!";
@@ -20,6 +25,9 @@ public class Constants {
     public static final String JSP_EMPLOYEESLIST_EMP_PAGE = "WEB-INF\\EmployeesListPageEmp.jsp";
     public static final String JSP_HOME_PAGE = "WEB-INF/LoginPage.jsp";
     public static final String JSP_WELCOME_PAGE = "WEB-INF/EmployeesListPage.jsp";
+    public static final String JSP_NAVBAR_PAGE= "WEB-INF\\Navbar.jsp";
+    
+    // Login Form
     public static final String FRM_LOGIN_FIELD = "loginField";
     public static final String FRM_PWD_FIELD = "pwdField";
     public static final String LOGIN_FIELD_EMPTY_MSG = "Veuilez remplir l'identifiant de connexion";

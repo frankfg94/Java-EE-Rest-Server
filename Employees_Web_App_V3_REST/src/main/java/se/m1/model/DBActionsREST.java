@@ -30,7 +30,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import se.m1.beans.EmployeesSB;
-import se.m1.ctrl.LoginPageController;
 import static se.m1.utils.Constants.*;
 
 /**

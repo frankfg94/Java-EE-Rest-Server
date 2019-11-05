@@ -4,8 +4,11 @@
     Author     : JAA
 --%>
 
+<%@page import="se.m1.utils.Constants"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="previousPageUrl" value="<%=Constants.JSP_GOODBYE_PAGE %>" scope="request" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +18,13 @@
     </head>
     <body>
 
-            <!-- Reinitialisation des paramètres, ugly pour l'instant , plus tard il faudra regroupper toutes les données dans une Java Bean et la mettre à null -->
-            <c:set var="isAdmin" value="${false}" scope="session" />
             <c:if test="${not empty requestScope.errKey}">
                 <p style="color:red">${requestScope.errKey}</p>
             </c:if> 
-                <form  name ='myform' action='LoginPageController' method="POST">
+                <form  name ='myform' action='Controller' method="POST">
             Login :<input type='text' placeholder="Login"  name='loginField'><br/>
             Password :<input type='password' placeholder="Password" name='pwdField'><br/>
-            <input type='submit' name='action' value='ok'>
+            <input type='submit' name='action' value='Connect'>
         </form>
     </body>
 </html>

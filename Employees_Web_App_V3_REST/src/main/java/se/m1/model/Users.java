@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
     , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
     , @NamedQuery(name = "Users.findByLogin", query = "SELECT u FROM Users u WHERE u.login = :login")
-    , @NamedQuery(name = "Users.findByPwd", query = "SELECT u FROM Users u WHERE u.pwd = :pwd")})
+    , @NamedQuery(name = "Users.findByPwd", query = "SELECT u FROM Users u WHERE u.pwd = :pwd")
+    , @NamedQuery(name = "Users.findByRole", query = "SELECT u FROM Users u WHERE u.role = :role")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +50,9 @@ public class Users implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "PWD")
     private String pwd;
+    @Size(max = 15)
+    @Column(name = "ROLE")
+    private String role;
 
     public Users() {
     }
@@ -87,6 +91,14 @@ public class Users implements Serializable {
         this.pwd = pwd;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -109,7 +121,11 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "se.m1.model.Users[ id=" + id + " ]";
+        return "se.m1.beans.Users[ id=" + id + " ]";
+    }
+
+    public boolean VerifyCredentials(String login, String pwd) {
+        return this.login.equals(login) && this.pwd.equals(pwd);
     }
     
 }
