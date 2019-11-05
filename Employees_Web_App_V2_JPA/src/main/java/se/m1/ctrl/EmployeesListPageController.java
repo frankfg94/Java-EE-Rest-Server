@@ -79,6 +79,7 @@ public class EmployeesListPageController extends HttpServlet {
         }
         else if(AddButClicked)
         {
+            request.getSession().setAttribute("selEmployee", null);
             System.out.println("Add button clicked");
             request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
             return;

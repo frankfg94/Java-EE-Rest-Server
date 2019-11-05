@@ -43,7 +43,7 @@ public class DBActionsREST {
     public final String EMPLOYEES_REL_URL = "/se.m1.model.employees";
     
     // Active le mode rest à true, et le mode jpa à false pour le système CRUD (les appels URL fonctionneront dans tous les cas)
-    public boolean REST_ONLY = false;
+    public boolean REST_ONLY = true;
     
     
     Connection conn;
@@ -222,6 +222,9 @@ public class DBActionsREST {
     
     public void deleteEmployee(Employees e)
     {
+        if(e==null)
+            System.out.println("Cannot delete employee because it is null");
+        
         if(REST_ONLY)
             deleteEmployeeREST(e.getId());
         else 
@@ -233,9 +236,7 @@ public class DBActionsREST {
         try {
             CloseableHttpClient client = HttpClients.createDefault();
             HttpDelete del = new HttpDelete(REST_SERVICE_URL + EMPLOYEES_REL_URL + "/" + id);
-            HttpResponse resp =  client.execute(del);
-            System.out.println(EntityUtils.toString(resp.getEntity()));
-            
+            HttpResponse resp =  client.execute(del);            
         } catch (IOException ex) {
             Logger.getLogger(DBActionsREST.class.getName()).log(Level.SEVERE, null, ex);
         }

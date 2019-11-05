@@ -63,8 +63,12 @@ public class EmployeesListPageController extends HttpServlet {
             System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
             request.getSession().setAttribute("selEmployee", employees.get(selEmployeeId));
             try {
-                 LoginPageController.dba.deleteEmployee(employees.get(selEmployeeId));
+                LoginPageController.dba.deleteEmployee(employees.get(selEmployeeId));
                 employees.remove(selEmployeeId);
+                if((boolean)request.getSession().getAttribute("isAdmin"))
+                        request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
+                    else 
+                        request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeesListPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,6 +87,7 @@ public class EmployeesListPageController extends HttpServlet {
         }
         else if(AddButClicked)
         {
+            request.setAttribute("selEmployee", null);
             System.out.println("Add button clicked");
             request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response);
             return;
