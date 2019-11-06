@@ -27,12 +27,13 @@ import se.m1.model.DBActionsMySql;
 import se.m1.model.Employees;
 import se.m1.utils.Constants;
 import static se.m1.utils.Constants.*;
+import se.m1.utils.Utilities;
 
 /**
  *
  * @author JAA
  */
-public class EmployeesDetailsPageController extends HttpServlet {
+public class EmployeesDetailsPageActions extends HttpServlet {
 
     InputStream input;
     String dbUrl="";
@@ -62,22 +63,23 @@ public class EmployeesDetailsPageController extends HttpServlet {
        handleEmployeesDetailsPageActions(request, response);
        
     }
-
-        private void handleEmployeesDetailsPageActions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception 
+    
+    
+    private void handleEmployeesDetailsPageActions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception 
         {
               request.getSession().setAttribute("previousPageUrl",Constants.JSP_EMPLOYEES_DETAILS_PAGE);
-              boolean saveButClicked =request.getParameter(Constants.SAVE_EMP_DETAILS_BUT_NAME) != null;
-              boolean cancelButClicked = request.getParameter(Constants.CANCEL_EMP_DETAILS_BUT_NAME) != null;
-              boolean createButClicked = request.getParameter(Constants.CREATE_EMP_BUT_NAME) != null;
-              if(saveButClicked)
+              String clickedValue = (String)request.getParameter("action");
+
+              
+              if(clickedValue.equals("Save"))
               {
                   saveButAction(request, response);
               }
-              else if(cancelButClicked)
+              else if(clickedValue.equals("Cancel"))
               {
                   cancelButAction(request, response);
-              } 
-              else if (createButClicked)
+              }
+              else if (clickedValue.equals("Create"))
               {
                   createButAction(request, response);
               }
@@ -96,21 +98,22 @@ public class EmployeesDetailsPageController extends HttpServlet {
         
         void cancelButAction(HttpServletRequest request, HttpServletResponse response) throws Exception
         {
-             if((boolean)(request.getSession().getAttribute("isAdmin")))
-                    request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
-                  else
-                    request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
+             if(Utilities.CurUserIsAdmin(request))
+                 Utilities.NavigateAndSavePrevPage(request, response, Constants.JSP_EMPLOYEESLIST_PAGE);
+             else
+                 Utilities.NavigateAndSavePrevPage(request, response, Constants.JSP_EMPLOYEESLIST_EMP_PAGE);
         }
         
         void createButAction(HttpServletRequest request, HttpServletResponse response) throws Exception
         {
-                  addNewEmployee(request);
+            addNewEmployee(request);
                   
-                  // On active le mode création
-                  request.getSession().setAttribute("selEmployee", null);    
-                  request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
+            // On active le mode création
+            request.getSession().setAttribute("selEmployee", null);
+            Utilities.NavigateAndSavePrevPage(request,response,Constants.JSP_EMPLOYEESLIST_PAGE);
         }
         
+
         
     Employees GetDataFromDetailsForm(HttpServletRequest request)
     {
@@ -141,20 +144,20 @@ public class EmployeesDetailsPageController extends HttpServlet {
        selEmployee = GetDataFromDetailsForm(request);
        selEmployee.setId(tempId);
        
-       if(LoginPageController.dba == null)
+       if(LoginPageActions.dba == null)
             System.out.println("null");
-       LoginPageController.instance.empSB.EditEmployee(selEmployee);
-       request.getSession().setAttribute("empList", LoginPageController.instance.empSB.getAllEmployeesDict());
+       LoginPageActions.dba.editEmployee(selEmployee);
+       request.getSession().setAttribute("empList", LoginPageActions.dba.getAllEmployees());
         System.out.println("Employee Update Done");
     }
     
         private void addNewEmployee(HttpServletRequest request) {
          
        Employees employeeFromForm = GetDataFromDetailsForm(request);
-       LoginPageController.instance.empSB.AddEmployee(employeeFromForm);    
+       LoginPageActions.dba.insertEmployee(employeeFromForm);
        
        // Actualise la liste
-       request.getSession().setAttribute("empList", LoginPageController.instance.empSB.getAllEmployeesDict());
+       request.getSession().setAttribute("empList", LoginPageActions.dba.getAllEmployees());
        System.out.println("Employee Added to the Database");
     }
 
@@ -176,7 +179,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(EmployeesDetailsPageController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesDetailsPageActions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -194,7 +197,7 @@ public class EmployeesDetailsPageController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(EmployeesDetailsPageController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeesDetailsPageActions.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -33,6 +33,7 @@ public class Constants {
     public static final String CANCEL_EMP_DETAILS_BUT_NAME = "cancelDetailsEmpBut";
     public static final String CREATE_EMP_BUT_NAME = "createEmpBut";
     public static final String JSP_GOODBYE_PAGE = "WEB-INF\\GoodbyePage.jsp";
+    public static final String FILE_PROPERTIES_DB_PATH = "/WEB-INF/db.properties";
     
 
 }

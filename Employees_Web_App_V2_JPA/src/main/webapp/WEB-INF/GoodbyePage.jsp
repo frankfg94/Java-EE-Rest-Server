@@ -4,6 +4,7 @@
     Author     : franc
 --%>
 
+<%@page import="se.m1.utils.Constants"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
@@ -12,7 +13,6 @@
         elem.submit();
 }
 </script>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,10 +20,10 @@
         <title>Disconnected</title>
     </head>
     <body>
-        <form action="NavbarController" method="POST">
+        <form action="Controller" method="POST">
             <h1>Goodbye!</h1>
             <h2>Your disconnection is sucessful</h2>
-            <input type="submit" name="goToLoginPageBut" value="Go to the Login Page"/>
+            <input type="submit" name="action" value="Go to the Login Page"/>
         </form>
     </body>
 </html>

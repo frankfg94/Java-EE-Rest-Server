@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import se.m1.ctrl.LoginPageController;
+import se.m1.ctrl.LoginPageActions;
 import se.m1.model.Employees;
 
 /**
