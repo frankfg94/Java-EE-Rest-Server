@@ -110,6 +110,25 @@ public class EmployeesDetailsPageController extends HttpServlet {
                   request.getSession().setAttribute("selEmployee", null);    
                   request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
         }
+        
+        
+    Employees GetDataFromDetailsForm(HttpServletRequest request)
+    {
+
+        
+       Employees emp = new Employees();
+       emp.setName(request.getParameter("empName"));
+       emp.setFirstname(request.getParameter("empFirstname"));
+       emp.setTelhome(request.getParameter("empTelhome"));
+       emp.setTelmob(request.getParameter("empTelmob"));
+       emp.setTelpro(request.getParameter("empTelpro"));
+       emp.setAdress(request.getParameter("empAdress"));
+       emp.setPostalcode(request.getParameter("empPostalcode"));
+       emp.setCity(request.getParameter("empCity"));
+       emp.setEmail(request.getParameter("empEmail"));
+       
+       return emp;
+    }
     
     private void editCurrentEmployee( HttpServletRequest request) throws Exception
     {
@@ -118,37 +137,20 @@ public class EmployeesDetailsPageController extends HttpServlet {
         if(selEmployee == null)
             System.out.println("Employee is NULL, can't save it");
         
-       selEmployee.setName( request.getParameter("empName"));
-       selEmployee.setFirstname(request.getParameter("empFirstName"));
-       selEmployee.setTelmob(request.getParameter("empTelhome"));
-       selEmployee.setTelhome(request.getParameter("empTelmob"));
-       selEmployee.setTelpro(request.getParameter("empTelpro"));
-       selEmployee.setAdress(request.getParameter("empAdress"));
-       selEmployee.setPostalcode(request.getParameter("empPostalcode"));
-       selEmployee.setCity(request.getParameter("empCity"));
-       selEmployee.setEmail(request.getParameter("empEmail"));
+       int tempId = selEmployee.getId();
+       selEmployee = GetDataFromDetailsForm(request);
+       selEmployee.setId(tempId);
        
        if(LoginPageController.dba == null)
             System.out.println("null");
        LoginPageController.instance.empSB.EditEmployee(selEmployee);
+       request.getSession().setAttribute("empList", LoginPageController.instance.empSB.getAllEmployeesDict());
         System.out.println("Employee Update Done");
     }
     
         private void addNewEmployee(HttpServletRequest request) {
          
-       Employees employeeFromForm = new Employees();
-       
-       employeeFromForm.setName( request.getParameter("empName"));
-       employeeFromForm.setFirstname(request.getParameter("empFirstname"));
-       employeeFromForm.setTelhome(request.getParameter("empTelhome"));
-       employeeFromForm.setTelmob(request.getParameter("empTelmob"));
-       employeeFromForm.setTelpro(request.getParameter("empTelpro"));
-       employeeFromForm.setAdress(request.getParameter("empAdress"));
-       employeeFromForm.setPostalcode(request.getParameter("empPostalcode"));
-       employeeFromForm.setCity(request.getParameter("empCity"));
-       String s = request.getParameter("empTelmob");
-            System.out.println(s);
-       employeeFromForm.setEmail(request.getParameter("empEmail"));
+       Employees employeeFromForm = GetDataFromDetailsForm(request);
        LoginPageController.instance.empSB.AddEmployee(employeeFromForm);    
        
        // Actualise la liste

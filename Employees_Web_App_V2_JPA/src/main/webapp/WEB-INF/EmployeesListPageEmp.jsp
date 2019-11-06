@@ -59,13 +59,13 @@
                                     </c:choose>
                                              <td>${emp.value.getName()}</td>
                                              <td>${emp.value.getFirstname()}</td> 
-                                             <td>${emp.value.getHomePhone()}</td>
-                                             <td>${emp.value.getMobilePhone()}</td>
-                                             <td>${emp.value.getProPhone()}</td>
-                                             <td>${emp.value.getAddress()}</td>
-                                             <td>${emp.value.getPostalCode()}</td>
+                                             <td>${emp.value.getTelhome()}</td>
+                                             <td>${emp.value.getTelmob()}</td>
+                                             <td>${emp.value.getTelpro()}</td>
+                                             <td>${emp.value.getAdress()}</td>
+                                             <td>${emp.value.getPostalcode()}</td>
                                              <td>${emp.value.getCity()}</td>
-                                             <td>${emp.value.getMail()}</td>
+                                             <td>${emp.value.getEmail()}</td>
                                             </tr>
                                             
                             </c:forEach>

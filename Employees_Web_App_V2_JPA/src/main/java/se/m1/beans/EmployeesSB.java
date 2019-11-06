@@ -58,7 +58,15 @@ public class EmployeesSB {
     
     public void EditEmployee(Employees selEmployee) {
         System.out.println("Start of edit");
+          try{
         em.merge(selEmployee);
+          }catch( ConstraintViolationException ex )
+          {
+              for(ConstraintViolation<?> e: ex.getConstraintViolations())
+                {
+                    System.out.println(e.getRootBeanClass().getName() +"."+e.getPropertyPath()+ " " + e.getMessage());   
+                }
+          }
         System.out.println("Edit Successful");
     }
 
