@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.TreeMap;
 import javax.ejb.EJB;
+import javax.ejb.embeddable.EJBContainer;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,6 +40,8 @@ public class LoginPageActions {
     String dbUrl="";
     String dbUser="";
     String dbPwd="";
+    public UsersSB usersSB;
+    public EmployeesSB empSB;
     
 
     
@@ -53,11 +58,14 @@ public class LoginPageActions {
      */
 
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, EmployeesSB empSB, UsersSB usersSB)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet)
+            throws ServletException, IOException, NamingException {
 
 //        request.getSession().setAttribute("previousPageUrl", Constants.JSP_LOGIN_PAGE);
-        
+        InitialContext ic = new InitialContext();
+         usersSB = (UsersSB)ic.lookup("java:global/Employees_Web_App_V3_REST/UsersSB!se.m1.beans.UsersSB");
+         empSB = (EmployeesSB)ic.lookup("java:global/Employees_Web_App_V3_REST/EmployeesSB!se.m1.beans.EmployeesSB");
+
         initDBProps(servlet);
         displayEmptyFieldsErrMsg(request, response);
         
@@ -68,6 +76,7 @@ public class LoginPageActions {
             
             List<Users> dbUsers = usersSB.getAllUsers();
 
+            
             //Data entered by the user
             userInput = new Users();
             userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));

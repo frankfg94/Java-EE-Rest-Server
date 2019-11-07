@@ -57,7 +57,7 @@ public class Controller extends HttpServlet {
         switch(context)
         {     
             case "Connect": 
-               new LoginPageActions().processRequest(request, response, this,empSB, usersSB);
+               new LoginPageActions().processRequest(request, response, this);
                break;
             case "Add":
             case "Delete":

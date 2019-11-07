@@ -12,14 +12,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import se.m1.ctrl.LoginPageActions;
 import se.m1.model.Employees;
 
 /**
  *
  * @author franc
  */
-@Stateless //  Stateless permet de différencier ce bean d'un bean SE (différencier ce bean d'un plain old java object (pojo)
+@Stateless
 public class EmployeesSB {
 
     @PersistenceContext
@@ -58,15 +57,7 @@ public class EmployeesSB {
     
     public void EditEmployee(Employees selEmployee) {
         System.out.println("Start of edit");
-          try{
         em.merge(selEmployee);
-          }catch( ConstraintViolationException ex )
-          {
-              for(ConstraintViolation<?> e: ex.getConstraintViolations())
-                {
-                    System.out.println(e.getRootBeanClass().getName() +"."+e.getPropertyPath()+ " " + e.getMessage());   
-                }
-          }
         System.out.println("Edit Successful");
     }
 

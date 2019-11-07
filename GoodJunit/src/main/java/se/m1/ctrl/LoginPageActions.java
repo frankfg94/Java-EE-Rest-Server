@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.TreeMap;
 import javax.ejb.EJB;
+import javax.ejb.embeddable.EJBContainer;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import se.m1.beans.EmployeesSB;
 import se.m1.beans.UsersSB;
-import se.m1.model.DBActionsMySql;
+import se.m1.model.DBActionsREST;
 import se.m1.model.Employees;
 import se.m1.model.Users;
 import se.m1.utils.Constants;
@@ -33,14 +34,15 @@ import se.m1.utils.Utilities;
 
 public class LoginPageActions {
 
-    public static DBActionsMySql dba;
+    public static DBActionsREST dba;
     Users userInput;
     InputStream input;
     String dbUrl="";
     String dbUser="";
     String dbPwd="";
-    private UsersSB usersSB;
-    private EmployeesSB empSB;
+    public UsersSB usersSB;
+    public EmployeesSB empSB;
+    
 
     
 
@@ -60,10 +62,9 @@ public class LoginPageActions {
             throws ServletException, IOException, NamingException {
 
 //        request.getSession().setAttribute("previousPageUrl", Constants.JSP_LOGIN_PAGE);
-        
-          InitialContext ic = new InitialContext();
-         usersSB = (UsersSB)ic.lookup("java:global/Employees_Web_App_V2_JPA/UsersSB!se.m1.beans.UsersSB");
-         empSB = (EmployeesSB)ic.lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
+        InitialContext ic = new InitialContext();
+         usersSB = (UsersSB)ic.lookup("java:global/Employees_Web_App_V3_REST/UsersSB!se.m1.beans.UsersSB");
+         empSB = (EmployeesSB)ic.lookup("java:global/Employees_Web_App_V3_REST/EmployeesSB!se.m1.beans.EmployeesSB");
 
         initDBProps(servlet);
         displayEmptyFieldsErrMsg(request, response);
@@ -71,10 +72,11 @@ public class LoginPageActions {
         if(request.getAttribute("errKey") == null)
         {
             if(dba == null)
-             dba = new DBActionsMySql(dbUrl,dbUser,dbPwd,empSB);
+             dba = new DBActionsREST(dbUrl,dbUser,dbPwd,empSB);
             
             List<Users> dbUsers = usersSB.getAllUsers();
 
+            
             //Data entered by the user
             userInput = new Users();
             userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));
@@ -127,9 +129,7 @@ public class LoginPageActions {
     void initDBProps(HttpServlet servlet) throws IOException
     {
         Properties prop = new Properties();
-        input = servlet.getServletContext().getResourceAsStream(Constants.FILE_PROPERTIES_DB_PATH);
-        if(input == null)
-            throw new NullPointerException("DB Properties file not found");
+        input = servlet.getServletContext().getResourceAsStream(FILE_PROPERTIES_DB_PATH);
         prop.load(input);
         dbUrl = prop.getProperty("dbUrl");
         dbUser = prop.getProperty("dbUser");

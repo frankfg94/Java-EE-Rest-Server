@@ -9,10 +9,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.embeddable.EJBContainer;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,14 +44,11 @@ public class UsersSBTest {
     public void tearDown() {
     }
 
-            private static Logger log = Logger.getLogger(UsersSBTest.class.getName());
-
     /**
      * Test of getAllUsers method, of class UsersSB.
      */
     @Test
     public void testGetAllUsers() throws Exception {
-
         System.out.println("getAllUsers");
         Map<String, Object> props =new HashMap<>();
        //props.put("org.glassfish.ejb.embedded.glassfish.installation.root","C:\\Program Files\\glassfish-4.1.1\\glassfish");
@@ -68,7 +62,7 @@ public class UsersSBTest {
         System.out.println("The following list of users has been retrieved : ");
         for(Users e : result)
         {
-            log.log(Level.INFO,e.getId() + " | " + e.getLogin() + " | " + e.getPwd() + " | " + e.getRole() );
+            System.out.println(e.getId() + " | " + e.getLogin() + " | " + e.getPwd() + " | " + e.getRole());
         }
         container.close();
         // TODO review the generated test code and remove the default call to fail.
