@@ -84,9 +84,8 @@ public class EmployeesSBTest {
      */
     @Test
     public void testCRUDEmployee() throws Exception {
-                Map<String, Object> props = new HashMap<String, Object>();
+        Map<String, Object> props = new HashMap<String, Object>();
         props.put("org.glassfish.ejb.embedded.glassfish.installation.root", "C:\\Users\\franc\\.m2\\repository\\org\\glassfish");
-
         System.out.println("AddEmployee");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer(props);
         EmployeesSB instance = (EmployeesSB)container.getContext().lookup("java:global/classes/EmployeesSB");

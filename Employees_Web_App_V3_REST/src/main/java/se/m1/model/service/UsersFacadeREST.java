@@ -17,7 +17,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import se.m1.model.Users;
 
 /**
@@ -87,6 +89,15 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    @GET
+    @Produces("text/plain;charset=UTF-8")
+    @Path("hello")
+    public String sayHello(@Context SecurityContext sc) {
+            if (sc.isUserInRole("admin"))  
+                return "Hello World!";
+            throw new SecurityException("User is unauthorized." );
     }
     
 }
