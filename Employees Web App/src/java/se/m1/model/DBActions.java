@@ -33,18 +33,18 @@ public class DBActions {
         }
     }
 
-    public Statement getStatement() {
+    public Statement getStatement() 
+        throws SQLException {
         System.out.println("Get Statement"); 
-        try {
             stmt = conn.createStatement();
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-        }
+        
+        
         return stmt;
 
     }
 
-    public ResultSet getResultSet(String query) {
+    public ResultSet getResultSet(String query) 
+        throws SQLException {
         System.out.println("Get Result Set"); 
         stmt = getStatement();
         try {
@@ -56,7 +56,8 @@ public class DBActions {
 
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() 
+        throws SQLException {
         System.out.println("Get Users"); 
         listUsers = new ArrayList<>();
         rs = getResultSet(QUERY_SEL_CREDENTIALS);
@@ -74,7 +75,8 @@ public class DBActions {
         return listUsers;
     }
 
-    public TreeMap<Integer,Employee> getEmployees() {
+    public TreeMap<Integer,Employee> getEmployees() 
+        throws SQLException {
         System.out.println("Get Employees"); 
         listEmployees = new TreeMap<Integer,Employee>();
         rs = getResultSet(QUERY_SEL_EMPLOYEES);
@@ -104,7 +106,8 @@ public class DBActions {
      * @param userInput
      * @return
      */
-    public boolean checkCredentials(User userInput) {
+    public boolean checkCredentials(User userInput) 
+        throws SQLException {
         boolean testCheck = false;
         listUsers = getUsers();
 
@@ -160,7 +163,6 @@ public class DBActions {
         
     }
 
-    
     public void AddEmployee(Employee emp) {
         try {
             String query = "INSERT INTO EMPLOYEES(NAME,FIRSTNAME,TELHOME,TELMOB,TELPRO,ADRESS,POSTALCODE,CITY,EMAIL) values(?,?,?,?,?,?,?,?,?)";
