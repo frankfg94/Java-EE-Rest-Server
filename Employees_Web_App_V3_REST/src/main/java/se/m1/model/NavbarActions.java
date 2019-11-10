@@ -3,23 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.m1.ctrl;
+package se.m1.model;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import se.m1.utils.Constants;
-import se.m1.utils.Utilities;
 
 /**
  *
  * @author franc
  */
 public class NavbarActions {
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+     public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
      {
          

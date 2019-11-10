@@ -100,7 +100,7 @@ public class EmployeesSBTest {
         emp.setCity("Paris");
         emp.setAdress("/");
         System.out.println("Beginning operations");
-        instance.AddEmployee(emp);
+        instance.addEmployee(emp);
         System.out.println("Employee Added");
         emp.setEmail("This a modified mail");
         instance.EditEmployee(emp);

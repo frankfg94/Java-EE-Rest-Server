@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.m1.ctrl;
+package se.m1.model;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import se.m1.model.Employees;
 import se.m1.utils.Constants;
 import se.m1.utils.Utilities;
 /**
@@ -30,7 +28,8 @@ public class EmployeesDetailsPageActions {
     String dbPwd="";
 
 
-        
+    private static final Logger LOGGER = Logger.getLogger(EmployeesDetailsPageActions.class.getName());
+
     // TODO : mettre ces variables directement dans EmployeesListPage.jsp
     final static String DELETE_EMPLOYEE_BUTTON_NAME = "delEmpButton";
     final static String EDIT_EMPLOYEE_BUTTON_NAME = "detailsEmpButton";
@@ -45,17 +44,13 @@ public class EmployeesDetailsPageActions {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-//        if(Utilities.CurUserIsAdmin(request))
-//            request.getSession().setAttribute("previousPageUrl", Constants.JSP_EMPLOYEES_DETAILS_PAGE);
-//        else 
-//            request.getSession().setAttribute("previousPageUrl", Constants.JSP_EMPLOYEESLIST_EMP_PAGE);
-//        
+
         HttpSession sess =  request.getSession();
-        selEmployee =(Employees) sess.getAttribute("selEmployee");
+        selEmployee =(Employees) sess.getAttribute(Constants.SEL_EMPLOYEE_NAME);
         
-       handleEmployeesDetailsPageActions(request, response);
+        handleEmployeesDetailsPageActions(request, response);
        
     }
 
@@ -65,29 +60,26 @@ public class EmployeesDetailsPageActions {
               String clickedValue = (String)request.getParameter("action");
 
               
-              if(clickedValue.equals("Save"))
-              {
-                  saveButAction(request, response);
-              }
-              else if(clickedValue.equals("Cancel"))
-              {
-                  cancelButAction(request, response);
-              }
-              else if (clickedValue.equals("Create"))
-              {
-                  createButAction(request, response);
-              }
-              else
-              {
-                 System.out.println("Unknown button clicked");
-              }
+            switch (clickedValue) {
+                case "Save":
+                    saveButAction(request, response);
+                    break;
+                case "Cancel":
+                    cancelButAction(request, response);
+                    break;
+                case "Create":
+                    createButAction(request, response);
+                    break;
+                default:
+                    throw new NullPointerException("Unknown button clicked");
+        }
         }
 
         void saveButAction(HttpServletRequest request, HttpServletResponse response) throws Exception
         {
              editCurrentEmployeeFromForm(request);
-             request.getSession().setAttribute("selEmployee", null);
-            request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
+             request.getSession().setAttribute(Constants.SEL_EMPLOYEE_NAME, null);
+             request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
         }
         
         void cancelButAction(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -103,7 +95,7 @@ public class EmployeesDetailsPageActions {
             addNewEmployeeFromForm(request);
                   
             // On active le mode création
-            request.getSession().setAttribute("selEmployee", null);
+            request.getSession().setAttribute(Constants.SEL_EMPLOYEE_NAME, null);
             Utilities.NavigateAndSavePrevPage(request,response,Constants.JSP_EMPLOYEESLIST_PAGE);
         }
         
@@ -129,7 +121,7 @@ public class EmployeesDetailsPageActions {
     void editCurrentEmployeeFromForm( HttpServletRequest request) throws Exception
     {
         if(selEmployee == null)
-            System.out.println("Employee is NULL, can't save it");
+            throw new NullPointerException("The employee from the method editCurrentEmployeeFromForm is null");
         
        int tempId = selEmployee.getId();
        selEmployee = GetDataFromDetailsForm(request);
@@ -139,7 +131,7 @@ public class EmployeesDetailsPageActions {
             throw new NullPointerException("The dba Action class must not be null , it must be instantiated to edit an employee");
        
        LoginPageActions.dba.editEmployee(selEmployee);
-       System.out.println("Employee Update Done");
+       LOGGER.log(Level.FINE,"Employee Update Done");
     }
     
     void addNewEmployeeFromForm(HttpServletRequest request) {

@@ -28,11 +28,16 @@ public class Constants {
     public static final String JSP_NAVBAR_PAGE= "WEB-INF\\Navbar.jsp";
     
     // Login Form
-    public static final String FRM_LOGIN_FIELD = "loginField";
-    public static final String FRM_PWD_FIELD = "pwdField";
+    public static final String FRM_LOGIN_FIELD_NAME = "loginField";
+    public static final String FRM_PASS_FIELD_NAME = "pwdField";
     public static final String LOGIN_FIELD_EMPTY_MSG = "Veuilez remplir l'identifiant de connexion";
-    public static final String PWD_FIELD_EMPTY_MSG = "Veuillez entrer un mot de passe";
+    public static final String PASS_FIELD_EMPTY_MSG = "Veuillez entrer un mot de passe";
+    public static final String ERR_MSG = "errKey";
+
     
+    // Employees general info
+    public static final String SEL_EMPLOYEE_NAME = "selEmployee";
+        
     // Employees list file
     public static final String RADIO_EMPLOYEES_LIST_NAME = "selRadioBut";
     public static final String JSP_EMPLOYEES_DETAILS_PAGE = "WEB-INF\\EmployeesDetailsPage.jsp";

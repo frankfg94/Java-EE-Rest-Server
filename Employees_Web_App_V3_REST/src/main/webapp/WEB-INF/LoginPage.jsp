@@ -10,7 +10,7 @@
 <c:set var="previousPageUrl" value="<%=Constants.JSP_GOODBYE_PAGE %>" scope="request" />
 
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
     <head>
           <link rel="stylesheet" href="style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
