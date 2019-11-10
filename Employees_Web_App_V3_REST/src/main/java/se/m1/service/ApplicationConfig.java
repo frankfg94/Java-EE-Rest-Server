@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.m1.model.service;
+package se.m1.service;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,8 +29,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(se.m1.model.service.EmployeesFacadeREST.class);
-        resources.add(se.m1.model.service.UsersFacadeREST.class);
+        resources.add(se.m1.service.EmployeesFacadeREST.class);
+        resources.add(se.m1.service.UsersFacadeREST.class);
     }
     
 }

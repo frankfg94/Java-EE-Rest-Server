@@ -14,7 +14,7 @@
 }
 </script>
 <!DOCTYPE html>
-<html>
+<html lang="en-GB">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Disconnected</title>

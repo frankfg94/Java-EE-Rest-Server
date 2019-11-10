@@ -19,7 +19,7 @@ import se.m1.model.Employees;
  *
  * @author franc
  */
-@Stateless
+@Stateless //  Stateless permet de différencier ce bean d'un bean SE (différencier ce bean d'un plain old java object (pojo)
 public class EmployeesSB {
 
     @PersistenceContext

@@ -5,6 +5,10 @@
  */
 package se.m1.ctrl;
 
+import se.m1.model.EmployeesDetailsPageActions;
+import se.m1.model.EmployeesListPageActions;
+import se.m1.model.LoginPageActions;
+import se.m1.model.NavbarActions;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -33,7 +37,6 @@ public class Controller extends HttpServlet {
     @EJB
     public  EmployeesSB empSB;
     
-    boolean firstStart = true;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,7 +60,7 @@ public class Controller extends HttpServlet {
         switch(context)
         {     
             case "Connect": 
-               new LoginPageActions().processRequest(request, response, this,empSB, usersSB);
+               new LoginPageActions().processRequest(request, response, this);
                break;
             case "Add":
             case "Delete":

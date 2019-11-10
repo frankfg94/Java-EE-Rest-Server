@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.m1.ctrl;
+package se.m1.model;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,19 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.TreeMap;
-import javax.ejb.EJB;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import se.m1.beans.EmployeesSB;
 import se.m1.beans.UsersSB;
-import se.m1.model.DBActionsREST;
-import se.m1.model.Employees;
-import se.m1.model.Users;
 import se.m1.utils.Constants;
 import static se.m1.utils.Constants.*;
 import se.m1.utils.Utilities;
@@ -31,14 +28,16 @@ import se.m1.utils.Utilities;
 
 public class LoginPageActions {
 
-    public static DBActionsREST dba;
+    public  static DBActionsREST dba;
     Users userInput;
     InputStream input;
     String dbUrl="";
     String dbUser="";
     String dbPwd="";
+    public UsersSB usersSB;
+    public EmployeesSB empSB;
     
-
+     
     
 
     /**
@@ -53,25 +52,29 @@ public class LoginPageActions {
      */
 
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, EmployeesSB empSB, UsersSB usersSB)
-            throws ServletException, IOException {
+    public void processRequest(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet)
+            throws ServletException, IOException, NamingException {
 
 //        request.getSession().setAttribute("previousPageUrl", Constants.JSP_LOGIN_PAGE);
-        
+        InitialContext ic = new InitialContext();
+         usersSB = (UsersSB)ic.lookup("java:global/Employees_Web_App_V3_REST/UsersSB!se.m1.beans.UsersSB");
+         empSB = (EmployeesSB)ic.lookup("java:global/Employees_Web_App_V3_REST/EmployeesSB!se.m1.beans.EmployeesSB");
+
         initDBProps(servlet);
         displayEmptyFieldsErrMsg(request, response);
         
-        if(request.getAttribute("errKey") == null)
+        if(request.getAttribute(Constants.ERR_MSG) == null)
         {
             if(dba == null)
-             dba = new DBActionsREST(dbUrl,dbUser,dbPwd,empSB);
+             dba = new DBActionsREST(dbUrl,dbUser,dbPwd);
             
             List<Users> dbUsers = usersSB.getAllUsers();
 
+            
             //Data entered by the user
             userInput = new Users();
-            userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));
-            userInput.setPwd(request.getParameter(FRM_PWD_FIELD));
+            userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD_NAME));
+            userInput.setPwd(request.getParameter(FRM_PASS_FIELD_NAME));
             
             request.setAttribute("previousPageUrl",Constants.JSP_LOGIN_PAGE);
             
@@ -88,7 +91,7 @@ public class LoginPageActions {
                        return;
                    }
             }
-            request.setAttribute("errKey", ERR_MESSAGE);
+            request.setAttribute(Constants.ERR_MSG, ERR_MESSAGE);
             Utilities.NavigateAndSavePrevPage(request, response, JSP_LOGIN_PAGE);
         }
     }
@@ -109,9 +112,9 @@ public class LoginPageActions {
         if (connFieldEmpty || pwdFieldEmpty)
         {
             if(connFieldEmpty)
-                request.setAttribute("errKey",Constants.LOGIN_FIELD_EMPTY_MSG);
+                request.setAttribute(ERR_MSG,Constants.LOGIN_FIELD_EMPTY_MSG);
             else
-                request.setAttribute("errKey", Constants.PWD_FIELD_EMPTY_MSG);
+                request.setAttribute(ERR_MSG, Constants.PASS_FIELD_EMPTY_MSG);
             Utilities.NavigateAndSavePrevPage(request, response, JSP_LOGIN_PAGE);
 //          request.getRequestDispatcher(JSP_LOGIN_PAGE).forward(request, response);
         }

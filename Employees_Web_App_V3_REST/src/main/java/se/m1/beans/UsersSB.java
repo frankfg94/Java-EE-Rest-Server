@@ -6,12 +6,9 @@
 package se.m1.beans;
 
 import java.util.List;
-import java.util.TreeMap;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import se.m1.model.Employees;
 
 /**
  *
