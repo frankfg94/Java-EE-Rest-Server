@@ -1,11 +1,11 @@
 package se.m1.model;
 
-import se.m1.ctrl.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,14 +15,14 @@ import se.m1.utils.Utilities;
 
 public class EmployeesListPage {
 
-    InputStream input;
-
-    // Informations pour la base de données
-    private String dbUrl = "";
-    private String dbUser = "";
-    private String dbPwd = "";
     private TreeMap<Integer, Employees> employees;
     private int selEmployeeId;
+    private EmployeesSB empSB;
+    
+    public EmployeesListPage() throws NamingException{
+       empSB = (EmployeesSB) new InitialContext().lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
+        
+    }
 
     public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         employees = (TreeMap<Integer, Employees>) request.getSession().getAttribute("empList");
@@ -31,19 +31,20 @@ public class EmployeesListPage {
         if (request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME) != null) {
             selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
         } else {
-            request.setAttribute("errRadioButton", "Veuillez d'abord selectionner un employé");
+            request.setAttribute("errRadioButton", "Please select an employee to delete first");
             request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
         }
 
         if (!employees.containsKey(selEmployeeId)){
+            request.getSession().setAttribute("empList", empSB.getAllEmployeesDict());
             request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
         }
 
         request.getSession().setAttribute("selEmployee", employees.get(selEmployeeId));
 
         try {
-            LoginPage.dba.deleteEmployee(employees.get(selEmployeeId));
-            request.getSession().setAttribute("empList", LoginPage.dba.getAllEmployees());
+            empSB.RemoveEmployee(employees.get(selEmployeeId));
+            request.getSession().setAttribute("empList", empSB.getAllEmployeesDict());
 
             request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
 
@@ -56,13 +57,13 @@ public class EmployeesListPage {
         if(request.getSession().getAttribute("empList") != null)
             employees = (TreeMap<Integer, Employees>) request.getSession().getAttribute("empList");
         else
-            employees = LoginPage.dba.getAllEmployees();
+            employees = empSB.getAllEmployeesDict();
 
         // get the id of the selected emplyee
         if (request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME) != null) {
             selEmployeeId = Integer.parseInt(request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
         } else {
-            request.setAttribute("errRadioButton", "Veuillez d'abord selectionner un employé");
+            request.setAttribute("errRadioButton", "Please select an employee first");
             if (Utilities.CurUserIsAdmin(request)) {
                 request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
             } else {
@@ -73,7 +74,7 @@ public class EmployeesListPage {
 
         try {
             System.out.println("Edit/Details button clicked");
-            Employees emp = employees.get(selEmployeeId);
+            Employees emp = employees.get((Integer)selEmployeeId);
             if (emp == null) {
                 throw new NullPointerException("Cannot get the variable selEmployeeId from the radioButton because " + Constants.RADIO_EMPLOYEES_LIST_NAME + " is null");
             }

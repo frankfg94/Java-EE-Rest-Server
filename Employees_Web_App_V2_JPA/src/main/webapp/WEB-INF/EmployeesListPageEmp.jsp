@@ -30,7 +30,6 @@
         <form action="Controller" method="POST">
             <h1> Employees List (Read Only) </h1>
             <c:set var="employees" value="${sessionScope.empList}"  />
-            <c:set var="empKeys" value ="${sessionScope.empKeys}" />
             <c:choose>
                 <c:when test="${not empty employees && employees.size() != 0}">
                     <table border='1'>
@@ -51,11 +50,11 @@
                             <tr>
                                 <c:choose>
                                     <c:when test="${firstLineChecked eq false}">
-                                        <td><input type='radio' value="${empKeys[status.index]}" checked='checked'  name="${radioName}"></td>
+                                        <td><input type='radio' value="${emp.value.getId()}" checked='checked'  name="${radioName}"></td>
                                             <c:set var="firstLineChecked" value="true"  />
                                         </c:when>
                                         <c:otherwise>
-                                        <td><input type='radio' value="${empKeys[status.index]}"  name="${radioName}"></td>
+                                        <td><input type='radio' value="${emp.value.getId()}"  name="${radioName}"></td>
                                         </c:otherwise>
                                     </c:choose>
                                 <td>${emp.value.getName()}</td>

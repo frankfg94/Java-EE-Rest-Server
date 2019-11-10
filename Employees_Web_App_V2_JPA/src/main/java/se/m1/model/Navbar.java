@@ -14,7 +14,7 @@ public class Navbar {
         request.getRequestDispatcher(Constants.JSP_LOGIN_PAGE).forward(request, response);
     }
 
-    public void Disonnection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void Disconnection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Constants.JSP_GOODBYE_PAGE).forward(request, response);
     }
 

@@ -1,19 +1,23 @@
 package se.m1.model;
 
-import java.io.InputStream;
 import java.util.TreeMap;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import se.m1.beans.EmployeesSB;
 import se.m1.utils.Constants;
 
 public class EmployeesDetailsPage extends HttpServlet {
 
-    private InputStream input;
-    private String dbUrl = "";
-    private String dbUser = "";
-    private String dbPwd = "";
     private Employees selEmployee = null;
+    private EmployeesSB empSB;
+
+    public EmployeesDetailsPage() throws NamingException {
+        empSB = (EmployeesSB) new InitialContext().lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
+
+    }
 
     public void saveEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         selEmployee = (Employees) request.getSession().getAttribute("selEmployee");
@@ -27,11 +31,8 @@ public class EmployeesDetailsPage extends HttpServlet {
         selEmployee = GetDataFromDetailsForm(request);
         selEmployee.setId(tempId);
 
-        if (LoginPage.dba == null) {
-            System.out.println("null");
-        }
-        LoginPage.dba.editEmployee(selEmployee);
-        request.getSession().setAttribute("empList", LoginPage.dba.getAllEmployees());
+        empSB.EditEmployee(selEmployee);
+        request.getSession().setAttribute("empList", empSB.getAllEmployeesDict());
         System.out.println("Employee Update Done");
 
         request.getSession().setAttribute("selEmployee", null);
@@ -48,7 +49,7 @@ public class EmployeesDetailsPage extends HttpServlet {
 
     public void createNewEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Employees employeeFromForm = GetDataFromDetailsForm(request);
-        TreeMap<Integer, Employees> employees = LoginPage.dba.getAllEmployees();
+        TreeMap<Integer, Employees> employees = empSB.getAllEmployeesDict();
 
         for (int id : employees.keySet()) {
             Employees e = employees.get(id);
@@ -58,10 +59,10 @@ public class EmployeesDetailsPage extends HttpServlet {
             }
         }
 
-        LoginPage.dba.insertEmployee(employeeFromForm);
+        empSB.AddEmployee(employeeFromForm);
 
         // Actualise la liste
-        request.getSession().setAttribute("empList", LoginPage.dba.getAllEmployees());
+        request.getSession().setAttribute("empList", empSB.getAllEmployeesDict());
         System.out.println("Employee Added to the Database");
 
         // On active le mode création

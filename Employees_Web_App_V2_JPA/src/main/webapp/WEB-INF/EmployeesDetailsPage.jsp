@@ -32,13 +32,13 @@
                     <h2>Creation of a new Employee </h2>
                     <h3 style='display:inline-block; margin-right:10px'>Name</h3><input name='empName' maxlength='10' style='display:inline-block' type='text'/>
                     <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input name='empFirstname' maxlength='25' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input  name='empTelhome' maxlength='25' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input  name='empTelmob' maxlength='10' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input  name='empTelpro' maxlength='10' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input  name='empAdress' maxlength='10' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input  name='empPostalcode' maxlength='10' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='10' style='display:inline-block' type='text' />
-                    <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empEmail' maxlength='10'  style='display:inline-block' type='text' />
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input  name='empTelhome' maxlength='25' style='display:inline-block' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input  name='empTelmob' maxlength='10' style='display:inline-block' type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input  name='empTelpro' maxlength='10' style='display:inline-block' type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input  name='empAdress' maxlength='150' style='display:inline-block' type='text' />
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input  name='empPostalcode' maxlength='5' style='display:inline-block' type='number' pattern="[1-7][0-9]{3}" />
+                    <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input  name='empCity' maxlength='25' style='display:inline-block' type='text' />
+                    <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input  name='empEmail' maxlength='25'  style='display:inline-block' type='email' placeholder="address@example.com"/>
                     <br/>
                     <input type='submit' value='Create' name="action"/>
                     <input type='submit' value='Cancel' name="action"/>

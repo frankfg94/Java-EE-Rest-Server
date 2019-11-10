@@ -1,4 +1,3 @@
-
 package se.m1.model;
 
 import java.io.IOException;
@@ -17,16 +16,13 @@ import se.m1.beans.EmployeesSB;
 import se.m1.beans.UsersSB;
 import se.m1.utils.Constants;
 import static se.m1.utils.Constants.*;
-import se.m1.utils.Utilities;
 
 public class LoginPage {
 
-    public static DBActionsMySql dba;
-    Users userInput;
-    InputStream input;
-    String dbUrl = "";
-    String dbUser = "";
-    String dbPwd = "";
+    private DBActionsMySql dba;
+    private Users userInput;
+    private InputStream input;
+    private String dbUrl, dbUser, dbPwd;
     private UsersSB usersSB;
     private EmployeesSB empSB;
 
@@ -35,14 +31,14 @@ public class LoginPage {
 
         InitialContext ic = new InitialContext();
         usersSB = (UsersSB) ic.lookup("java:global/Employees_Web_App_V2_JPA/UsersSB!se.m1.beans.UsersSB");
-        //empSB = (EmployeesSB) ic.lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
+        empSB = (EmployeesSB) ic.lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
 
         initDBProps(servlet);
         displayEmptyFieldsErrMsg(request, response);
 
         if (request.getAttribute("errKey") == null) {
             if (dba == null) {
-                dba = new DBActionsMySql(dbUrl, dbUser, dbPwd, empSB);
+                dba = new DBActionsMySql(dbUrl, dbUser, dbPwd);
             }
 
             List<Users> dbUsers = usersSB.getAllUsers();
@@ -70,7 +66,7 @@ public class LoginPage {
     }
 
     void loadEmpsAndSaveToRequest(HttpServletRequest request) {
-        TreeMap<Integer, Employees> emps = dba.getAllEmployees();
+        TreeMap<Integer, Employees> emps = empSB.getAllEmployeesDict();
         request.getSession().setAttribute("empList", emps);
         ArrayList<Integer> ints = new ArrayList<>();
         ints.addAll(emps.keySet());

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Navbar
-    Created on : 18 oct. 2019, 15:58:04
-    Author     : franc
---%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="se.m1.utils.Constants"%>
 <!DOCTYPE html>
