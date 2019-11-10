@@ -33,7 +33,8 @@ public class EmployeesListPage{
         request.getRequestDispatcher(Constants.JSP_EMPLOYEES_DETAILS_PAGE).forward(request, response); 
     }
     
-    public void employeesDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void employeesDetails(HttpServletRequest request, HttpServletResponse response) 
+        throws ServletException, IOException {
         //Retrieve data
         employees = (TreeMap<Integer,Employee>)request.getSession().getAttribute("empList");
         System.out.println("Edit/Details button clicked");

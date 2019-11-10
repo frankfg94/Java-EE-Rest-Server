@@ -3,6 +3,7 @@ package se.m1.model;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.Properties;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
@@ -26,7 +27,7 @@ public class LoginPage{
     }
     
     public void loginAttempt(HttpServletRequest request, HttpServletResponse response, GenericServlet servlet)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         Properties prop = new Properties();
         input = request.getServletContext().getResourceAsStream("/WEB-INF/db.properties");
