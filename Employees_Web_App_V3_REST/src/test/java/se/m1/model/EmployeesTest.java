@@ -194,7 +194,6 @@ public class EmployeesTest {
         String expResult = "Poland";
         String result = instance.getAdress();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**

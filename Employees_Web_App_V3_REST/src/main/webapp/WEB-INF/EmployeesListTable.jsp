@@ -3,6 +3,7 @@
     Created on : 9 nov. 2019, 18:40:18
     Author     : franc
 --%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="d" %>
 
 
 
@@ -21,17 +22,17 @@
                         <th scope="row">EMAIL</th>
                     </tr>
                
-                            <c:forEach items="${empList}" var="emp" varStatus="status">
+                            <d:forEach items="${empList}" var="emp" varStatus="status">
                                     <tr>
-                                    <c:choose>
-                                         <c:when test="${firstLineChecked eq false}">
+                                    <d:choose>
+                                         <d:when test="${firstLineChecked eq false}">
                                              <td><input type='radio' value="${empKeys[status.index]}" checked='checked'  name="${radioName}"></td>
                                              <c:set var="firstLineChecked" value="true"  />
-                                         </c:when>
-                                         <c:otherwise>
+                                         </d:when>
+                                         <d:otherwise>
                                              <td><input type='radio' value="${empKeys[status.index]}"  name="${radioName}"></td>
-                                         </c:otherwise>
-                                    </c:choose>
+                                         </d:otherwise>
+                                    </d:choose>
                                              <td>${emp.value.getName()}</td>
                                              <td>${emp.value.getFirstname()}</td> 
                                              <td>${emp.value.getTelhome()}</td>
@@ -43,7 +44,7 @@
                                              <td>${emp.value.getEmail()}</td>
                                             </tr>
                                             
-                            </c:forEach>
+                            </d:forEach>
 
                    </table>
                    <br/>

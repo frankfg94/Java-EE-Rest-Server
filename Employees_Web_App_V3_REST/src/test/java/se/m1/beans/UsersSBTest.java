@@ -66,10 +66,9 @@ public class UsersSBTest {
         List<Users> result = instance.getAllUsers();
         assertTrue(result.size() > 0);
         System.out.println("The following list of users has been retrieved : ");
-        for(Users e : result)
-        {
-            log.log(Level.INFO,e.getId() + " | " + e.getLogin() + " | " + e.getPwd() + " | " + e.getRole() );
-        }
+        result.forEach((e) -> {
+            log.log(Level.INFO, "{0} | {1} | {2} | {3}", new Object[]{e.getId(), e.getLogin(), e.getPwd(), e.getRole()});
+        });
         container.close();
         // TODO review the generated test code and remove the default call to fail.
     }
