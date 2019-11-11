@@ -65,11 +65,4 @@ public class EmployeesListPage{
         }
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
-
-
-
-
-
-
-
 }

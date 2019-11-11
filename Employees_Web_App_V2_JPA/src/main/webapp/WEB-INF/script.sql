@@ -1,6 +1,9 @@
 /*Creation of the database*/
 CREATE DATABASE IF NOT EXISTS JEEPRJ;
 
+/* Creation of the database user (and only if it doesn't exist)*/
+GRANT ALL PRIVILEGES  ON `JEEPRJ`.* TO 'jee'@'localhost' IDENTIFIED BY 'jee';
+
 /*Creation of the table EMPLOYEES and USERS*/
 USE JEEPRJ;
 DROP TABLE IF EXISTS EMPLOYEES;

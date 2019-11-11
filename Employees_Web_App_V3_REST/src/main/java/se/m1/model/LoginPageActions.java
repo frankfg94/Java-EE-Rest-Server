@@ -107,8 +107,8 @@ public class LoginPageActions {
     
     void displayEmptyFieldsErrMsg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        boolean connFieldEmpty = request.getParameter("loginField").equals("");
-        boolean pwdFieldEmpty = request.getParameter("pwdField").equals("");
+        boolean connFieldEmpty = request.getParameter("loginField").isEmpty();
+        boolean pwdFieldEmpty = request.getParameter("pwdField").isEmpty();
         if (connFieldEmpty || pwdFieldEmpty)
         {
             if(connFieldEmpty)

@@ -5,7 +5,7 @@
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="se.m1.utils.Constants"%>
-  <head>
+  <head lang="en">
     <!-- Place your kit's code here -->
     <script src="https://kit.fontawesome.com/a797cb5608.js" crossorigin="anonymous"></script>
   </head>

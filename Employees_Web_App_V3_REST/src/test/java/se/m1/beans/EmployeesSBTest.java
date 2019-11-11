@@ -27,42 +27,49 @@ import se.m1.model.Employees;
  * @author franc
  */
 public class EmployeesSBTest {
-    
+
+    private static EJBContainer container;
+    private static boolean started = false;
     public EmployeesSBTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() throws IOException {
 
     }
     
+    @BeforeClass
+        // We store the container only one time to gain performances
+    public  static void setUpClass() throws IOException {
+        if(!started)
+        {   
+            started = true;
+            container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        }
+    }
+    
     @AfterClass
-    public static void tearDownClass() {
+        // We free the resources when all the tests are done
+    public  static void tearDownClass() {    
+        container.close();
     }
     
     @Before
     public void setUp() {
+
     }
+    
     
     @After
     public void tearDown() {
     }
 
-//    /**
-//     * Test of getAllEmployees method, of class EmployeesSB.
-//     */
-//    @Test
-//    public void testGetAllEmployees() throws Exception {
-//        System.out.println("getAllEmployees");
-//        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-//        EmployeesSB instance = (EmployeesSB)container.getContext().lookup("java:global/classes/EmployeesSB");
-//        List expResult = null;
-//        List result = instance.getAllEmployees();
-//        assertEquals(expResult, result);
-//        container.close();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getAllEmployees method, of class EmployeesSB.
+     */
+    @Test
+    public void testGetAllEmployees() throws Exception {
+        System.out.println("getAllEmployees");
+        EmployeesSB instance = (EmployeesSB)container.getContext().lookup("java:global/classes/EmployeesSB");
+        List expResult = null;
+        List result = instance.getAllEmployees();
+    }
 
     /**
      * Test of getAllEmployeesDict method, of class EmployeesSB.
@@ -70,12 +77,10 @@ public class EmployeesSBTest {
     @Test
     public void testGetAllEmployeesDict() throws Exception {
         System.out.println("getAllEmployeesDict");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         EmployeesSB instance = (EmployeesSB)container.getContext().lookup("java:global/classes/EmployeesSB");
         TreeMap<Integer, Employees> expResult = null;
         TreeMap<Integer, Employees> result = instance.getAllEmployeesDict();
         assertEquals(expResult, null);
-        container.close();
         // TODO review the generated test code and remove the default call to fail.
     }
 
@@ -87,7 +92,6 @@ public class EmployeesSBTest {
         Map<String, Object> props = new HashMap<String, Object>();
         props.put("org.glassfish.ejb.embedded.glassfish.installation.root", "C:\\Users\\franc\\.m2\\repository\\org\\glassfish");
         System.out.println("AddEmployee");
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer(props);
         EmployeesSB instance = (EmployeesSB)container.getContext().lookup("java:global/classes/EmployeesSB");
         Employees emp = new Employees();
         emp.setEmail("thisEmailWillBeChanged@live.fr");
@@ -107,7 +111,6 @@ public class EmployeesSBTest {
         System.out.println("Employee edited");
         instance.RemoveEmployee(emp);
         System.out.println("Employee deleted successfuly");
-        container.close();
         // TODO review the generated test code and remove the default call to fail.
     }
 

@@ -1,20 +1,15 @@
-<%-- 
-    Document   : Navbar
-    Created on : 18 oct. 2019, 15:58:04
-    Author     : franc
---%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="se.m1.utils.Constants"%>
-<jsp:useBean id="userBean" type="se.m1.model.Users" scope="session"/>
-<!DOCTYPE html >
-        <form action="Controller">
-            <div>
-                <div class="disconnect-div" >
-                    <h2>Hello ${userBean.login} your session is Active! </h2>
-                    <button type="submit" name="action" value="Disconnect" >
-                        <img width="25" height="25" src="https://cdn.pixabay.com/photo/2017/01/02/21/42/power-off-1947949_960_720.png" alt="Disconnect">
-                    </button>
-                 </div>
-             </div>
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h2>Hello ${sessionScope.userBean.login} your session is Active! </h2>
+    <div class="collapse navbar-collapse">
+        <form action="Controller" method="GET">
+            <input type="submit" class="btn btn-outline-secondary" name="action" value="Disconnect">
         </form>
-     
+    </div>
+</nav>
+
+
+
