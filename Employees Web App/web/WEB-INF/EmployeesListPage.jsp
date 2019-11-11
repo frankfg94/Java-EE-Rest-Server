@@ -17,12 +17,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/employeeslistpagestyle.css" media="screen">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>JSP Page</title>
     </head>
     <body>
             <jsp:include page='Navbar.jsp'/>
-            <form action="Controller" method="POST">
+            <div class="wrapper">
+            <form class="form-signin" action="Controller" method="POST">
              <h1> Employees List</h1>
             <%
                 request.setAttribute("state", "AdminListPage");
@@ -30,7 +34,7 @@
               //  ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
                 if(employees != null && employees.size() != 0)
                 {
-                    out.print("<table border='1'>");
+                    out.print("<table class='table table-striped table bordered'>");
                     out.print("<tr>");
                         out.print("<td>Sél</td>");
                         out.print("<td>NAME</td>");
@@ -69,18 +73,18 @@
                    }
                     out.print("</table>");
                     out.print("<br/>");
-                    out.print("<input type='submit' value='Delete' name='action'/>");
-                    out.print("<input type='submit' value='Details' name='action'/>");
+                    out.print("<input class='btn btn-primary' type='submit' value='Delete' name='action'/>");
+                    out.print("<input class='btn btn-primary' type='submit' value='Details' name='action'/>");
                 }
                 else 
                 {
                     out.print("<h2 style='color:red;'>The company doesn't have employees!</h2>");
                 }
 
-                out.print("<input type='submit' value='Add' name='action'/>");
+                out.print("<input class='btn btn-primary' type='submit' value='Add' name='action'/>");
 
             %>
         </form>
-       
+       </div>
     </body>
 </html>
