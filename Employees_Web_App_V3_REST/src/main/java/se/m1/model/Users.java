@@ -45,9 +45,7 @@ public class Users implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "LOGIN")
     private String login;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
+    @Size(max = 25)
     @Column(name = "PWD")
     private String pwd;
     @Size(max = 15)
@@ -61,10 +59,9 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public Users(Integer id, String login, String pwd) {
+    public Users(Integer id, String login) {
         this.id = id;
         this.login = login;
-        this.pwd = pwd;
     }
 
     public Integer getId() {
@@ -121,11 +118,11 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "se.m1.beans.Users[ id=" + id + " ]";
+        return "se.m1.model.Users[ id=" + id + " ]";
     }
 
-    public boolean VerifyCredentials(String login, String pwd) {
-        return this.login.equals(login) && this.pwd.equals(pwd);
+    boolean VerifyCredentials(String login, String pwd) {
+        return login.equals(login) && pwd.equals(pwd);
     }
     
 }

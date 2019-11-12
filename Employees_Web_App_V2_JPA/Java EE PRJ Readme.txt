@@ -27,15 +27,7 @@ et remplacer le fichier domain.xml existant avec le fichier domain fourni(à la r
 Host : localhost , Port : 3306  , Username : jee, Password : jee Database : jeeprj
 URL : jdbc:mysql://localhost:3306/jeeprj?zeroDateTimeBehavior=convertToNull
 
-2) Clic droit sur le projet --> creer --> New Jdbc Resource
-Create New JDBC ConnnectionPool
-JNDI Name : jdbc/myEmployeesRes
-Next
-Next 
-JDBC Connection Pool Name emp_connectionPool
-Extract from Existing connection --> selectionner celle avec jdbc:mysql://localhost:3306/jeeprj?zeroDateTimeBehavior=convertToNull
-
-3) Cliquer sur Services --> Servers --> GlassFish Server
+2) Cliquer sur Services --> Servers --> GlassFish Server
 si le serveur est stoppé : Démarrer le serveur glassfish avec clic droit -> Start
 Glassfish Server  --> View Domain Admin Console
 
