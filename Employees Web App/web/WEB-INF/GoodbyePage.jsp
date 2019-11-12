@@ -1,9 +1,3 @@
-<%-- 
-    Document   : GoodbyePage
-    Created on : 18 oct. 2019, 16:24:24
-    Author     : franc
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">

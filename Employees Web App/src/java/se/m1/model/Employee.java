@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package se.m1.model;
 
 /**
  * Java Bean class for an Employee
+ *
  * @author Administrateur
  */
 public class Employee {
@@ -32,8 +32,9 @@ public class Employee {
     }
 
     public String getName() {
-        if(name == null)
+        if (name == null) {
             return "";
+        }
         return name;
     }
 
@@ -82,8 +83,9 @@ public class Employee {
     }
 
     public String getPostalCode() {
-        if(postalCode==null)
+        if (postalCode == null) {
             return "";
+        }
         return postalCode;
     }
 
@@ -107,6 +109,4 @@ public class Employee {
         this.mail = mail;
     }
 
-    
-    
 }
