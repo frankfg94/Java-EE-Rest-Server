@@ -11,20 +11,35 @@ import se.m1.utils.Constants;
 
 public class EmployeesDetailsPage extends HttpServlet {
 
+    /**
+     * The employee that is selected by the user via the different radio buttons on the employee list page
+     */
     private Employees selEmployee = null;
+    
+    
     private EmployeesSB empSB;
 
+    /**
+     * We find the EJB the first time we create an instance of this class
+     * @throws NamingException 
+     */
     public EmployeesDetailsPage() throws NamingException {
+        if(empSB==null)
         empSB = (EmployeesSB) new InitialContext().lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
 
     }
 
+    /**
+     * Search and gather information from the current employee's page and then saves this same employee
+     * @param request
+     * @param response
+     * @throws Exception 
+     */
     public void saveEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         selEmployee = (Employees) request.getSession().getAttribute("selEmployee");
         if (selEmployee == null) {
             System.out.println("Employee is NULL, can't save it");
             return;
-            // METTRE UNE EXCEPTION SINON PB APRES CAR SELEMPLOYEE EST UTILISE
         }
 
         int tempId = selEmployee.getId();
@@ -39,14 +54,32 @@ public class EmployeesDetailsPage extends HttpServlet {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
+    /**
+     * Go back to the page of the page representing the list of the employees
+     * @param request
+     * @param response
+     * @throws Exception 
+     */
     public void cancelEmployeesCreation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
+     /**
+     * Go back to the page of the page representing the list of the employees
+     * @param request
+     * @param response
+     * @throws Exception 
+     */
     public void goBackToEmpList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
     }
 
+    /**
+     * Create a new employee by searching the employee's data in the current form
+     * @param request
+     * @param response
+     * @throws Exception 
+     */
     public void createNewEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Employees employeeFromForm = GetDataFromDetailsForm(request);
         TreeMap<Integer, Employees> employees = empSB.getAllEmployeesDict();
@@ -70,6 +103,11 @@ public class EmployeesDetailsPage extends HttpServlet {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
+    /**
+     * Search for all the possible fields in the JSP employees details spage and creates an employee with it
+     * @param request
+     * @return the newly created employee
+     */
     Employees GetDataFromDetailsForm(HttpServletRequest request) {
         Employees emp = new Employees();
         emp.setName(request.getParameter("empName"));

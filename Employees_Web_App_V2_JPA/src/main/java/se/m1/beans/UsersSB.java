@@ -11,6 +11,10 @@ public class UsersSB {
     @PersistenceContext
     EntityManager em;
 
+    /**
+     * Get all the users that can connect to the login page
+     * @return 
+     */
     public List getAllUsers() {
         return em.createNamedQuery("Users.findAll").getResultList();
     }

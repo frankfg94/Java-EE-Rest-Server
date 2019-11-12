@@ -9,18 +9,14 @@ import se.m1.model.Users;
 
 public class Utilities {
 
-    public static String GetPrevPageName(HttpServletRequest request)
-    {
-           return  request.getHeader("Referer");
-    }
 
+    /**
+     * Returns true if the role variable of the current user is set to "admin"
+     * @param request
+     * @return 
+     */
     public static boolean CurUserIsAdmin(HttpServletRequest request) {
         return ((Users)request.getSession().getAttribute("userBean")).getRole().equals("admin");
     }
 
-    public static void NavigateAndSavePrevPage(HttpServletRequest request, HttpServletResponse response, String prevPage) throws ServletException, IOException {
-        request.getSession().setAttribute("previousPageUrl",prevPage);
-        request.getRequestDispatcher(prevPage).forward(request, response);
-    }
-    
 }
