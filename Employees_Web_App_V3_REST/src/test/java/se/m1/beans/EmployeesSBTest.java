@@ -5,10 +5,7 @@
  */
 package se.m1.beans;
 
- import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,11 +103,9 @@ public class EmployeesSBTest {
         System.out.println("Beginning operations");
         instance.addEmployee(emp);
         System.out.println("Employee Added");
-        emp.setEmail("This a modified mail");
+        emp.setEmail("This a modified mail, changed with a unit test");
         instance.EditEmployee(emp);
-        System.out.println("Employee edited");
-        instance.RemoveEmployee(emp);
-        System.out.println("Employee deleted successfuly");
+        System.out.println("Employee edited successfully");
         // TODO review the generated test code and remove the default call to fail.
     }
 

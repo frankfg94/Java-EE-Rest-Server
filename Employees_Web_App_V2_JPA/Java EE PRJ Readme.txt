@@ -22,7 +22,9 @@ Restful application. Sonarqube code recommendations were followed.
 Le serveur embedded situé dans test dependencies ne possède pas les ressources pour pouvoir se
 connecter à mysql à distance, pour cela : 
 
-Déplacer le fichier domain.xml dans  /org/glassfish/extras/glassfish-embedded-all/3.1.1/glassfish-embedded-all-3.1.1.jar/org/glassfish/embed
+
+1) télécharger les dépendances Maven
+2) Déplacer le fichier domain.xml dans  /org/glassfish/extras/glassfish-embedded-all/3.1.1/glassfish-embedded-all-3.1.1.jar/org/glassfish/embed
 et remplacer le fichier domain.xml existant avec le fichier domain fourni(à la racine du projet Employees_Web_App_V3_REST) pour que les tests utilisent mysql et les bons connexion pool
 (winrar est conseillé pour ouvrir l'archive glassfish-embedded-all-3.1.1.jar) 
 
