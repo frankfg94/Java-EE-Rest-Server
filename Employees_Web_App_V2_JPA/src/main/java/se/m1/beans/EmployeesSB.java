@@ -40,7 +40,7 @@ public class EmployeesSB {
      * Add a new employee depending on the parameter emp (Employees)
      * @param emp 
      */
-    public void AddEmployee(Employees emp) {
+    public void AddEmployee(Employees emp) throws ConstraintViolationException {
         try {
             if (emp != null) {
                 em.persist(emp);
@@ -51,7 +51,7 @@ public class EmployeesSB {
             for (ConstraintViolation<?> ex : e.getConstraintViolations()) {
                 System.out.println(ex.getRootBeanClass().getName() + "." + ex.getPropertyPath() + " " + ex.getMessage());
             }
-
+            throw e;
         }
     }
 
@@ -59,7 +59,7 @@ public class EmployeesSB {
      * Edit an employee depending on the parameter emp (Employees)
      * @param selEmployee 
      */
-    public void EditEmployee(Employees selEmployee) {
+    public void EditEmployee(Employees selEmployee) throws ConstraintViolationException {
         System.out.println("Start of edit");
         try {
             em.merge(selEmployee);
@@ -67,6 +67,7 @@ public class EmployeesSB {
             for (ConstraintViolation<?> e : ex.getConstraintViolations()) {
                 System.out.println(e.getRootBeanClass().getName() + "." + e.getPropertyPath() + " " + e.getMessage());
             }
+            throw ex;
         }
         System.out.println("Edit Successful");
     }
@@ -75,12 +76,18 @@ public class EmployeesSB {
      * Remove the employee
      * @param emp 
      */
-    public void RemoveEmployee(Employees emp) {
+    public void RemoveEmployee(Employees emp) throws ConstraintViolationException{
 
+                try {
         if (!em.contains(emp)) {
             emp = em.merge(emp);
+            em.remove(emp);
+        }}catch (ConstraintViolationException ex) {
+            for (ConstraintViolation<?> e : ex.getConstraintViolations()) {
+                System.out.println(e.getRootBeanClass().getName() + "." + e.getPropertyPath() + " " + e.getMessage());
+            }
+            throw ex;
         }
 
-        em.remove(emp);
     }
 }

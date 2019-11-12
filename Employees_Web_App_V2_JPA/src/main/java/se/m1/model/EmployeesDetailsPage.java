@@ -1,8 +1,10 @@
 package se.m1.model;
 
+import java.io.IOException;
 import java.util.TreeMap;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,9 @@ public class EmployeesDetailsPage extends HttpServlet {
      */
     private Employees selEmployee = null;
     
-    
+    /**
+     * The Employees bean we want to retrieve
+     */
     private EmployeesSB empSB;
 
     /**
@@ -35,7 +39,7 @@ public class EmployeesDetailsPage extends HttpServlet {
      * @param response
      * @throws Exception 
      */
-    public void saveEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void saveEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         selEmployee = (Employees) request.getSession().getAttribute("selEmployee");
         if (selEmployee == null) {
             System.out.println("Employee is NULL, can't save it");
@@ -58,9 +62,8 @@ public class EmployeesDetailsPage extends HttpServlet {
      * Go back to the page of the page representing the list of the employees
      * @param request
      * @param response
-     * @throws Exception 
      */
-    public void cancelEmployeesCreation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void cancelEmployeesCreation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException   {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_PAGE).forward(request, response);
     }
 
@@ -68,9 +71,8 @@ public class EmployeesDetailsPage extends HttpServlet {
      * Go back to the page of the page representing the list of the employees
      * @param request
      * @param response
-     * @throws Exception 
      */
-    public void goBackToEmpList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void goBackToEmpList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
         request.getRequestDispatcher(Constants.JSP_EMPLOYEESLIST_EMP_PAGE).forward(request, response);
     }
 
@@ -78,9 +80,8 @@ public class EmployeesDetailsPage extends HttpServlet {
      * Create a new employee by searching the employee's data in the current form
      * @param request
      * @param response
-     * @throws Exception 
      */
-    public void createNewEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void createNewEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
         Employees employeeFromForm = GetDataFromDetailsForm(request);
         TreeMap<Integer, Employees> employees = empSB.getAllEmployeesDict();
 

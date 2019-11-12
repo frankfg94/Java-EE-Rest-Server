@@ -21,8 +21,7 @@
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
 
-                <c:set var="empOld" value="${sessionScope.selEmployee}" />
-                <c:set var="emp" value="${empOld}" scope="request" />
+                <c:set var="emp" value="${sessionScope.selEmployee}" />
 
 
                 <c:choose>
@@ -31,7 +30,7 @@
                         <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text'/>
                         <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text'/>
                         <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' type='tel' pattern="0[0-9]{8}" placeholder="ex: 0638012990"/>
                         <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
                         <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' />
                         <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" />
@@ -47,7 +46,7 @@
                         <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' value="${emp.getName()}"/>
                         <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text' value="${emp.getFirstname()}"/>
                         <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' value="${emp.getTelmob()}" type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' value="${emp.getTelmob()}" type='tel' pattern="0[0-9]{8}" placeholder="ex: 0638012990"/>
                         <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' value="${emp.getTelpro()}" type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
                         <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' value="${emp.getAdress()}"/>
                         <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" value="${emp.getPostalcode()}"/>

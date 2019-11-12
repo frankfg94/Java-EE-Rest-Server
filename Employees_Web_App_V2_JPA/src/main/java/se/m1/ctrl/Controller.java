@@ -28,15 +28,14 @@ public class Controller extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
+            {
         System.out.println("JE VIENS DE DO GET");
         //processRequest(request, response);
 
@@ -62,13 +61,11 @@ public class Controller extends HttpServlet {
                     //page jsp not found
             }
 
-        } catch (IOException | ServletException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     /**
@@ -80,8 +77,8 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
+             {
         System.out.println("JE VIENS DE DO POST");
         // processRequest(request, response);
 
@@ -119,7 +116,9 @@ public class Controller extends HttpServlet {
                 //page jsp not found
                 }
 
-        } catch (Exception ex) {
+        } catch (NamingException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

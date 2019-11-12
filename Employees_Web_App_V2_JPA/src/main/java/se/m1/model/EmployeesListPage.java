@@ -20,6 +20,7 @@ public class EmployeesListPage {
     private EmployeesSB empSB;
     
     public EmployeesListPage() throws NamingException{
+        if(empSB==null)
        empSB = (EmployeesSB) new InitialContext().lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
         
     }
