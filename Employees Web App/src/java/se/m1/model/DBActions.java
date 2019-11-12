@@ -17,11 +17,12 @@ import static se.m1.utils.Constants.*;
  * @author JAA
  */
 public class DBActions {
+
     Connection conn;
     Statement stmt;
     ResultSet rs;
     ArrayList<User> listUsers;
-    TreeMap<Integer,Employee> listEmployees;
+    TreeMap<Integer, Employee> listEmployees;
 
     public DBActions(String url, String user, String pwd) {
         try {
@@ -33,19 +34,18 @@ public class DBActions {
         }
     }
 
-    public Statement getStatement() 
-        throws SQLException {
-        System.out.println("Get Statement"); 
-            stmt = conn.createStatement();
-        
-        
+    public Statement getStatement()
+            throws SQLException {
+        System.out.println("Get Statement");
+        stmt = conn.createStatement();
+
         return stmt;
 
     }
 
-    public ResultSet getResultSet(String query) 
-        throws SQLException {
-        System.out.println("Get Result Set"); 
+    public ResultSet getResultSet(String query)
+            throws SQLException {
+        System.out.println("Get Result Set");
         stmt = getStatement();
         try {
             rs = stmt.executeQuery(query);
@@ -56,9 +56,9 @@ public class DBActions {
 
     }
 
-    public ArrayList<User> getUsers() 
-        throws SQLException {
-        System.out.println("Get Users"); 
+    public ArrayList<User> getUsers()
+            throws SQLException {
+        System.out.println("Get Users");
         listUsers = new ArrayList<>();
         rs = getResultSet(QUERY_SEL_CREDENTIALS);
         try {
@@ -75,10 +75,10 @@ public class DBActions {
         return listUsers;
     }
 
-    public TreeMap<Integer,Employee> getEmployees() 
-        throws SQLException {
-        System.out.println("Get Employees"); 
-        listEmployees = new TreeMap<Integer,Employee>();
+    public TreeMap<Integer, Employee> getEmployees()
+            throws SQLException {
+        System.out.println("Get Employees");
+        listEmployees = new TreeMap<Integer, Employee>();
         rs = getResultSet(QUERY_SEL_EMPLOYEES);
         try {
             while (rs.next()) {
@@ -93,7 +93,7 @@ public class DBActions {
                 emplBean.setHomePhone(rs.getString("TELHOME"));
                 emplBean.setId(rs.getInt("ID"));
                 emplBean.setPostalCode(rs.getString("POSTALCODE"));
-                listEmployees.put(emplBean.getId(),emplBean);
+                listEmployees.put(emplBean.getId(), emplBean);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -106,8 +106,8 @@ public class DBActions {
      * @param userInput
      * @return
      */
-    public boolean checkCredentials(User userInput) 
-        throws SQLException {
+    public boolean checkCredentials(User userInput)
+            throws SQLException {
         boolean testCheck = false;
         listUsers = getUsers();
 
@@ -120,10 +120,10 @@ public class DBActions {
         return testCheck;
     }
 
-     public void DeleteEmployee(Employee emp, int id) throws Exception {
-        
+    public void DeleteEmployee(Employee emp, int id) throws Exception {
+
         try {
-            
+
             // Prepared statements augmentent la sécurité
             String query = "DELETE FROM EMPLOYEES WHERE ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -133,25 +133,23 @@ public class DBActions {
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    
-    public void SaveEmployee(Employee emp, int id){
-        
-        
+
+    public void SaveEmployee(Employee emp, int id) {
+
         try {
-            
+
             // Prepared statements augmentent la sécurité
             String query = "UPDATE EMPLOYEES  SET NAME = ?, FIRSTNAME = ?, TELHOME = ?, TELMOB = ?, TELPRO = ?, ADRESS  = ?, POSTALCODE = ?, CITY = ?, EMAIL = ? WHERE ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, emp.getName());
             preparedStmt.setString(2, emp.getFirstname());
-            preparedStmt.setString(3,emp.getHomePhone());
+            preparedStmt.setString(3, emp.getHomePhone());
             preparedStmt.setString(4, emp.getMobilePhone());
             preparedStmt.setString(5, emp.getProPhone());
-            preparedStmt.setString(6,emp.getAddress());
-            preparedStmt.setString(7,emp.getPostalCode());
+            preparedStmt.setString(6, emp.getAddress());
+            preparedStmt.setString(7, emp.getPostalCode());
             preparedStmt.setString(8, emp.getCity());
             preparedStmt.setString(9, emp.getMail());
             preparedStmt.setInt(10, id);
@@ -160,7 +158,7 @@ public class DBActions {
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public void AddEmployee(Employee emp) {
@@ -169,11 +167,11 @@ public class DBActions {
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, emp.getName());
             preparedStmt.setString(2, emp.getFirstname());
-            preparedStmt.setString(3,emp.getHomePhone());
+            preparedStmt.setString(3, emp.getHomePhone());
             preparedStmt.setString(4, emp.getMobilePhone());
             preparedStmt.setString(5, emp.getProPhone());
-            preparedStmt.setString(6,emp.getAddress());
-            preparedStmt.setString(7,emp.getPostalCode());
+            preparedStmt.setString(6, emp.getAddress());
+            preparedStmt.setString(7, emp.getPostalCode());
             preparedStmt.setString(8, emp.getCity());
             preparedStmt.setString(9, emp.getMail());
             preparedStmt.executeUpdate();

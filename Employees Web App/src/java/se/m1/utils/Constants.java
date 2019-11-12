@@ -5,10 +5,6 @@
  */
 package se.m1.utils;
 
-/**
- *
- * @author nitsu
- */
 public class Constants {
 
 

@@ -10,7 +10,7 @@ package se.m1.model;
  * @author JAA
  */
 public class User {
-    
+
     private String login;
     private String pwd;
 
@@ -30,6 +30,4 @@ public class User {
         this.pwd = pwd;
     }
 
-   
-    
 }

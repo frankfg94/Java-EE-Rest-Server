@@ -1,12 +1,4 @@
-<%-- 
-    Document   : welcome
-    Created on : 20 sept. 2019, 10:33:43
-    Author     : JAA
---%>
-
 <%@page import="se.m1.utils.Constants"%>
-<!-- Valable uniquement pour la V1 du rendu (car pas le droit au code dans les JSPs) -->
-
 <%@page import="se.m1.model.Employee"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="se.m1.model.DBActions"%>
@@ -27,10 +19,8 @@
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
                 <%
-                    // Idée architecture françois : possibilité de parcourir chaque champ peut importe sa valeur et de l'afficher
                     Employee emp = (Employee) request.getAttribute("selEmployee");
                     request.getSession().setAttribute("selEmployee", emp);
-
                     if (emp == null) {
                         out.print("<h1>Creation of a new Employee </h1><br/>");
                         out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' />");
@@ -60,7 +50,6 @@
                         out.print("<input type='submit' class='btn btn-primary' value='Save' name='action'/>");
                         out.print("<input type='submit' class='btn btn-primary' value='Cancel' name='action'/>");
                     }
-
                 %>
             </form>
         </div>
