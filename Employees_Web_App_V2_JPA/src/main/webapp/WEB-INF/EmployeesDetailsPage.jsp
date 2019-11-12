@@ -12,7 +12,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/404.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/employeesdetailpagestyle.css" media="screen">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Employee Details</title>
     </head>
@@ -28,15 +28,15 @@
                 <c:choose>
                     <c:when test="${empty emp}">
                         <h1>Creation of a new Employee</h1><br/>
-                        <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text'/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' style='display:inline-block' type='text' />
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' style='display:inline-block' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' style='display:inline-block' type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' style='display:inline-block' type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input class='form-control' name='empAdress' maxlength='150' style='display:inline-block' type='text' />
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' style='display:inline-block' type='number' pattern="[1-7][0-9]{3}" />
-                        <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input class='form-control' name='empCity' maxlength='25' style='display:inline-block' type='text' />
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input class='form-control' name='empEmail' maxlength='25'  style='display:inline-block' type='email' placeholder="address@example.com"/>
+                        <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text'/>
+                        <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text'/>
+                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
+                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                        <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                        <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' />
+                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" />
+                        <h3>City</h3><input class='form-control' name='empCity' maxlength='25' type='text' />
+                        <h3>Email</h3><input class='form-control' name='empEmail' maxlength='25' type='email' placeholder="address@example.com"/>
                         <br/>
                         <input type='submit' class='btn btn-primary' value='Create' name="action"/>
                         <input type='submit' class='btn btn-primary' value='Cancel' name="action"/>
@@ -44,15 +44,15 @@
 
                     <c:otherwise>
                         <h1>Details of Employee  ${emp.getFirstname()}   ${emp.getName()}</h1><br/>
-                        <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text' value="${emp.getName()}"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' style='display:inline-block' type='text' value="${emp.getFirstname()}"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' style='display:inline-block' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' style='display:inline-block' value="${emp.getTelmob()}" type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' style='display:inline-block' value="${emp.getTelpro()}" type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input class='form-control' name='empAdress' maxlength='150' style='display:inline-block' type='text' value="${emp.getAdress()}"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' style='display:inline-block' type='number' pattern="[1-7][0-9]{3}" value="${emp.getPostalcode()}"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input class='form-control' name='empCity' maxlength='25' style='display:inline-block' type='text' value="${emp.getCity()}"/>
-                        <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input class='form-control' name='empEmail' maxlength='25'  style='display:inline-block' type='email' placeholder="address@example.com" value="${emp.getEmail()}"/>
+                        <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' value="${emp.getName()}"/>
+                        <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text' value="${emp.getFirstname()}"/>
+                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
+                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' value="${emp.getTelmob()}" type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                        <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' value="${emp.getTelpro()}" type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                        <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' value="${emp.getAdress()}"/>
+                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" value="${emp.getPostalcode()}"/>
+                        <h3>City</h3><input class='form-control' name='empCity' maxlength='25' type='text' value="${emp.getCity()}"/>
+                        <h3>Email</h3><input class='form-control' name='empEmail' maxlength='25' type='email' placeholder="address@example.com" value="${emp.getEmail()}"/>
                         <br/>
                         <input class='btn btn-primary' type='submit' value='Save' name="action"/>
                         <input class='btn btn-primary' type='submit' value='Cancel' name="action"/>
