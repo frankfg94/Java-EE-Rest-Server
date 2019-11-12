@@ -12,7 +12,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/employeesdetailpagestyle.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/404.css" media="screen">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Employee Details</title>
     </head>
@@ -27,7 +27,7 @@
 
                 <c:choose>
                     <c:when test="${empty emp}">
-                        <h2>Creation of a new Employee </h2>
+                        <h1>Creation of a new Employee</h1><br/>
                         <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text'/>
                         <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' style='display:inline-block' type='text' />
                         <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' style='display:inline-block' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
@@ -43,7 +43,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <h2>Details of Employee  ${emp.getFirstname()}   ${emp.getName()} </h2>
+                        <h1>Details of Employee  ${emp.getFirstname()}   ${emp.getName()}</h1><br/>
                         <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text' value="${emp.getName()}"/>
                         <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' style='display:inline-block' type='text' value="${emp.getFirstname()}"/>
                         <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' style='display:inline-block' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>

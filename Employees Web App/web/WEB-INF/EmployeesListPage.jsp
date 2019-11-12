@@ -27,14 +27,14 @@
             <jsp:include page='Navbar.jsp'/>
             <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
-             <h1> Employees List</h1>
+             <h1>Employees List</h1><br/>
             <%
                 request.setAttribute("state", "AdminListPage");
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
               //  ArrayList<Employee> employees = (ArrayList<Employee>)session.getAttribute("empList");
                 if(employees != null && employees.size() != 0)
                 {
-                    out.print("<table class='table table-striped table bordered'>");
+                    out.print("<table class='table table-striped table-bordered'>");
                     out.print("<tr>");
                         out.print("<td>Sél</td>");
                         out.print("<td>NAME</td>");

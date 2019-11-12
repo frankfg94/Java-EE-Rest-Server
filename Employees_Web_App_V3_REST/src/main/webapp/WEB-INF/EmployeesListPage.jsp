@@ -26,11 +26,11 @@
         <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
-                <h1> Employees List</h1>
+                <h1>Employees List</h1><br/>
                 <c:set var="employees" value="${sessionScope.empList}"  />
                 <c:choose>
                     <c:when test="${not empty employees && employees.size() != 0}">
-                        <table class='table table-striped table bordered'>
+                        <table class='table table-striped-table bordered'>
                             <tr>
                                 <td>Selection</td>
                                 <td>NAME</td>
