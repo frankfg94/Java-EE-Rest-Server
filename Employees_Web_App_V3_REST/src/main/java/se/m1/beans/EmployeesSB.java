@@ -20,7 +20,7 @@ import se.m1.model.EmployeesListPageActions;
 
 
 /**
- *
+ * Here, we handle all the queries related to the Employees class
  * @author franc
  */
 @Stateless
@@ -68,7 +68,7 @@ public class EmployeesSB {
 
     public void RemoveEmployee(Employees emp) {
 
-        // Pour ne pas avoir l'exception : java.lang.IllegalArgumentException: Entity must be managed to call remove: se.m1.beans.Employees
+        // To avoid the exception : java.lang.IllegalArgumentException: Entity must be managed to call remove: se.m1.beans.Employees
         if (!em.contains(emp)) {
             emp = em.merge(emp);
         }

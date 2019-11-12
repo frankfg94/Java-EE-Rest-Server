@@ -38,7 +38,7 @@ public class EmployeesSB {
 
     /**
      * Add a new employee depending on the parameter emp (Employees)
-     * @param emp 
+     * @param emp The employee to add
      */
     public void AddEmployee(Employees emp) throws ConstraintViolationException {
         try {
@@ -57,7 +57,7 @@ public class EmployeesSB {
 
     /**
      * Edit an employee depending on the parameter emp (Employees)
-     * @param selEmployee 
+     * @param selEmployee  the employee to edit
      */
     public void EditEmployee(Employees selEmployee) throws ConstraintViolationException {
         System.out.println("Start of edit");
@@ -74,7 +74,7 @@ public class EmployeesSB {
 
     /**
      * Remove the employee
-     * @param emp 
+     * @param emp  the employee to delete from the database
      */
     public void RemoveEmployee(Employees emp) throws ConstraintViolationException{
 
