@@ -27,34 +27,26 @@
                 <c:choose>
                     <c:when test="${empty emp}">
                         <h1>Creation of a new Employee</h1><br/>
-                        <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text'/>
-                        <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text'/>
-                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' type='tel' pattern="0[0-9]{8}" placeholder="ex: 0638012990"/>
-                        <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902" required/>
                         <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' />
-                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" />
+                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' type='text' maxlength="5" pattern="[1-9]{2}[0-9]{3}" />
                         <h3>City</h3><input class='form-control' name='empCity' maxlength='25' type='text' />
                         <h3>Email</h3><input class='form-control' name='empEmail' maxlength='25' type='email' placeholder="address@example.com"/>
                         <br/>
                         <input type='submit' class='btn btn-primary' value='Create' name="action"/>
-                        <input type='submit' class='btn btn-primary' value='Cancel' name="action"/>
+                        <input type='submit' formnovalidate class='btn btn-primary' value='Cancel' name="action"/>
                     </c:when>
 
                     <c:otherwise>
                         <h1>Details of Employee  ${emp.getFirstname()}   ${emp.getName()}</h1><br/>
-                        <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' value="${emp.getName()}"/>
-                        <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text' value="${emp.getFirstname()}"/>
-                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
-                        <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' value="${emp.getTelmob()}" type='tel' pattern="0[0-9]{8}" placeholder="ex: 0638012990"/>
-                        <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' value="${emp.getTelpro()}" type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                        <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902" required/>
                         <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' value="${emp.getAdress()}"/>
-                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" value="${emp.getPostalcode()}"/>
+                        <h3>Postal Code</h3><input class='form-control' name='empPostalcode' type='text' maxlength='5' pattern="[1-9]{2}[0-9]{3}" value="${emp.getPostalcode()}"/>
                         <h3>City</h3><input class='form-control' name='empCity' maxlength='25' type='text' value="${emp.getCity()}"/>
                         <h3>Email</h3><input class='form-control' name='empEmail' maxlength='25' type='email' placeholder="address@example.com" value="${emp.getEmail()}"/>
                         <br/>
                         <input class='btn btn-primary' type='submit' value='Save' name="action"/>
-                        <input class='btn btn-primary' type='submit' value='Cancel' name="action"/>
+                        <input class='btn btn-primary' formnovalidate type='submit' value='Cancel' name="action"/>
 
                     </c:otherwise>
                 </c:choose>

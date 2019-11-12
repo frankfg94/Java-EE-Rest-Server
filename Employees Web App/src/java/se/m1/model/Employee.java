@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package se.m1.model;
 
-/**
- * Java Bean class for an Employee
- * @author Administrateur
- */
 public class Employee {
 
     private int id;
@@ -22,7 +12,7 @@ public class Employee {
     private String postalCode;
     private String city;
     private String mail;
-
+    
     public int getId() {
         return id;
     }
@@ -32,8 +22,9 @@ public class Employee {
     }
 
     public String getName() {
-        if(name == null)
+        if (name == null) {
             return "";
+        }
         return name;
     }
 
@@ -82,8 +73,9 @@ public class Employee {
     }
 
     public String getPostalCode() {
-        if(postalCode==null)
+        if (postalCode == null) {
             return "";
+        }
         return postalCode;
     }
 
@@ -107,6 +99,4 @@ public class Employee {
         this.mail = mail;
     }
 
-    
-    
 }

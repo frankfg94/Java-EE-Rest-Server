@@ -19,66 +19,65 @@
     </head>
     <body>
         <jsp:include page='Navbar.jsp'/>
-        <c:if test="${not empty requestScope.errRadioButton}">
-            <p style="color:red">${requestScope.errRadioButton}</p>
-        </c:if> 
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
         <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME%>" />
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
                 <h1>Employees List</h1><br/>
+                <c:if test="${not empty requestScope.errRadioButton}">
+                    <p class="alert alert-warning" role="alert" style='width:100%'>${requestScope.errRadioButton}</p>
+                </c:if> 
                 <c:set var="employees" value="${sessionScope.empList}"  />
                 <c:choose>
                     <c:when test="${not empty employees && employees.size() != 0}">
-                        <table class='table table-striped table-bordered'>
-                            <tr>
-                                <td>Selection</td>
-                                <td>NAME</td>
-                                <td>FIRST NAME</td>
-                                <td>HOME PHONE</td>
-                                <td>MOBILE PHONE</td>
-                                <td>WORK PHONE</td>
-                                <td>ADDRESS</td>
-                                <td>POSTAL CODE</td>
-                                <td>CITY</td>
-                                <td>EMAIL</td>
-                            </tr>
-
-                            <c:forEach items="${empList}" var="emp" varStatus="status">
+                        <div class='wrapper-tab'>
+                            <table class='table table-striped table-bordered'>
                                 <tr>
-                                    <c:choose>
-                                        <c:when test="${firstLineChecked eq false}">
-                                            <td><input type='radio' value="${emp.value.getId()}" checked='checked'  name="${radioName}"></td>
-                                                <c:set var="firstLineChecked" value="true"  />
-                                            </c:when>
-                                            <c:otherwise>
-                                            <td><input type='radio' value="${emp.value.getId()}"  name="${radioName}"></td>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    <td>${emp.value.getName()}</td>
-                                    <td>${emp.value.getFirstname()}</td> 
-                                    <td>${emp.value.getTelhome()}</td>
-                                    <td>${emp.value.getTelmob()}</td>
-                                    <td>${emp.value.getTelpro()}</td>
-                                    <td>${emp.value.getAdress()}</td>
-                                    <td>${emp.value.getPostalcode()}</td>
-                                    <td>${emp.value.getCity()}</td>
-                                    <td>${emp.value.getEmail()}</td>
+                                    <td>Selection</td>
+                                    <td>NAME</td>
+                                    <td>FIRST NAME</td>
+                                    <td>HOME PHONE</td>
+                                    <td>MOBILE PHONE</td>
+                                    <td>WORK PHONE</td>
+                                    <td>ADDRESS</td>
+                                    <td>POSTAL CODE</td>
+                                    <td>CITY</td>
+                                    <td>EMAIL</td>
                                 </tr>
 
-                            </c:forEach>
+                                <c:forEach items="${empList}" var="emp" varStatus="status">
+                                    <tr>
+                                        <c:choose>
+                                            <c:when test="${firstLineChecked eq false}">
+                                                <td><input type='radio' value="${emp.value.getId()}" checked='checked'  name="${radioName}"></td>
+                                                    <c:set var="firstLineChecked" value="true"  />
+                                                </c:when>
+                                                <c:otherwise>
+                                                <td><input type='radio' value="${emp.value.getId()}"  name="${radioName}"></td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        <td>${emp.value.getName()}</td>
+                                        <td>${emp.value.getFirstname()}</td> 
+                                        <td>${emp.value.getTelhome()}</td>
+                                        <td>${emp.value.getTelmob()}</td>
+                                        <td>${emp.value.getTelpro()}</td>
+                                        <td>${emp.value.getAdress()}</td>
+                                        <td>${emp.value.getPostalcode()}</td>
+                                        <td>${emp.value.getCity()}</td>
+                                        <td>${emp.value.getEmail()}</td>
+                                    </tr>
 
-                        </table>
-                        <br/>
+                                </c:forEach>
+
+                            </table>
+                        </div>
                         <input class='btn btn-primary' type='submit' value='Delete'  name='action'/>
                         <input class='btn btn-primary' type='submit' value='Details' name='action'/>
-
                     </c:when>
                     <c:otherwise>
                         <h2 style='color:red;'>The company doesn't have employees!</h2>
                     </c:otherwise>
                 </c:choose>
-
                 <input class='btn btn-primary' type='submit' value='Add' formmethod="GET" name='action'/>
             </form>
         </div>
