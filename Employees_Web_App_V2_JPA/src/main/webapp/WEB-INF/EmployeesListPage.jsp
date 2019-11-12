@@ -18,12 +18,12 @@
         <title>Employees List</title>
     </head>
     <body>
+        <jsp:include page='Navbar.jsp'/>
         <c:if test="${not empty requestScope.errRadioButton}">
             <p style="color:red">${requestScope.errRadioButton}</p>
         </c:if> 
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
         <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME%>" />
-        <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
                 <h1> Employees List</h1>
