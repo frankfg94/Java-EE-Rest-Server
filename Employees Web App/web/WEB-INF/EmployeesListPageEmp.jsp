@@ -30,7 +30,7 @@
              <h1>Employees List</h1><br/>
             <%
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
-                out.print("<table class='table table-striped table bordered'>");
+                out.print("<table class='table table-striped table-bordered'>");
                 out.print("<tr>");
                     out.print("<td>Sél</td>");
                     out.print("<td>NAME</td>");
