@@ -122,7 +122,7 @@ public class Users implements Serializable {
     }
 
     boolean VerifyCredentials(String login, String pwd) {
-        return login.equals(login) && pwd.equals(pwd);
-    }
+        return login.equals(this.login) && pwd.equals(this.pwd);
+    }   
     
 }
