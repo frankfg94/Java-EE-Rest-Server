@@ -26,18 +26,20 @@
                 <c:set var="emp" value="${sessionScope.selEmployee}"/>
 
                 <h1>Details of Employee  ${emp.getFirstname()}   ${emp.getName()}</h1><br/>
-                <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' style='display:inline-block' type='text' value="${emp.getName()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' style='display:inline-block' type='text' value="${emp.getFirstname()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' style='display:inline-block' type='text' value="${emp.getTelhome()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input class='form-control' name='empTelMob' style='display:inline-block' type='text' value="${emp.getTelmob()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input class='form-control' name='empTelPro' style='display:inline-block' type='text' value="${emp.getTelpro()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input class='form-control' name='empAdress' style='display:inline-block' type='text' value="${emp.getAdress()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input class='form-control' name='empPostalcode' style='display:inline-block' type='text' value="${emp.getPostalcode()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input class='form-control' name='empCity' style='display:inline-block' type='text' value="${emp.getCity()}" readonly/>
-                <br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input class='form-control' name='empEmail'  style='display:inline-block' type='text' value="${emp.getEmail()}" readonly/>
+                <h3>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' value="${emp.getName()}" required />
+                <h3>First Name</h3><input class='form-control' name='empFirstname' maxlength='25' type='text' value="${emp.getFirstname()}" required />
+                <h3>Home Phone</h3><input class='form-control' name='empTelhome' maxlength='25' value="${emp.getTelhome()}" type='tel' pattern="01[0-9]{8}" placeholder="ex: 0145863902"/>
+                <h3>Mobile Phone</h3><input class='form-control' name='empTelmob' maxlength='10' value="${emp.getTelmob()}" type='tel' pattern="0[6|7][0-9]{8}" placeholder="ex: 0638012990"/>
+                <h3>Work Phone</h3><input class='form-control' name='empTelpro' maxlength='10' value="${emp.getTelpro()}" type='tel' pattern="[0-9]{10}" placeholder="ex: 0729548104"/>
+                <h3>Address</h3><input class='form-control' name='empAdress' maxlength='150' type='text' value="${emp.getAdress()}"/>
+                <h3>Postal Code</h3><input class='form-control' name='empPostalcode' maxlength='5' type='number' pattern="[1-7][0-9]{3}" value="${emp.getPostalcode()}"/>
+                <h3>City</h3><input class='form-control' name='empCity' maxlength='25' type='text' value="${emp.getCity()}"/>
+                <h3>Email</h3><input class='form-control' name='empEmail' maxlength='25' type='email' placeholder="address@example.com" value="${emp.getEmail()}"/>
                 <br/>
                 <input type='submit' class='btn btn-primary' value='Go Back' name="action"/>
             </form>
         </div>
     </body>
 </html>
+
+

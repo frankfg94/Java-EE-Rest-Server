@@ -32,15 +32,15 @@
                 request.getSession().setAttribute("selEmployee", emp);
 
                     out.print("<h1>Details of Employee : " +  emp.getFirstname()+  " " + emp.getName()+ "</h1><br/>");
-                    out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getName()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getFirstname()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control'  name='empHomePhone' maxlength='10' style='display:inline-block' type='text' value='"+emp.getHomePhone()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Mobile Phone</h3><input class='form-control'  name='empMobilePhone' maxlength='10' style='display:inline-block' type='text' value='"+emp.getMobilePhone()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Work Phone</h3><input class='form-control'  name='empProPhone' maxlength='10' style='display:inline-block' type='text' value='"+emp.getProPhone()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Address</h3><input class='form-control' name='empGetAddress' maxlength='10' style='display:inline-block' type='text' value='"+emp.getAddress()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Postal Code</h3><input class='form-control' name='empPostalCode' maxlength='10' style='display:inline-block' type='text' value='"+emp.getPostalCode()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>City</h3><input class='form-control' name='empCity' maxlength='10' style='display:inline-block' type='text' value='"+emp.getCity()+"'/>");
-                    out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Email</h3><input class='form-control' name='empMail' maxlength='10'  style='display:inline-block' type='text' value='"+emp.getMail()+"'/>");
+                    out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' type='text' value='"+emp.getName()+"'/>");
+                    out.print("<br/><h3>First Name</h3><input class='form-control' name='empFirstName' maxlength='10' type='text' value='"+emp.getFirstname()+"'/>");
+                    out.print("<br/><h3>Home Phone</h3><input class='form-control'  name='empHomePhone' maxlength='10' type='text' value='"+emp.getHomePhone()+"'/>");
+                    out.print("<br/><h3>Mobile Phone</h3><input class='form-control'  name='empMobilePhone' maxlength='10' type='text' value='"+emp.getMobilePhone()+"'/>");
+                    out.print("<br/><h3>Work Phone</h3><input class='form-control'  name='empProPhone' maxlength='10' type='text' value='"+emp.getProPhone()+"'/>");
+                    out.print("<br/><h3>Address</h3><input class='form-control' name='empGetAddress' maxlength='10' type='text' value='"+emp.getAddress()+"'/>");
+                    out.print("<br/><h3>Postal Code</h3><input class='form-control' name='empPostalCode' maxlength='10' type='text' value='"+emp.getPostalCode()+"'/>");
+                    out.print("<br/><h3>City</h3><input class='form-control' name='empCity' maxlength='10' type='text' value='"+emp.getCity()+"'/>");
+                    out.print("<br/><h3>Email</h3><input class='form-control' name='empMail' maxlength='10' type='text' value='"+emp.getMail()+"'/>");
                 out.print("<br/>");
                 out.print("<input type='submit' class='btn btn-primary' value='Go Back' name='action'/>");
             %>

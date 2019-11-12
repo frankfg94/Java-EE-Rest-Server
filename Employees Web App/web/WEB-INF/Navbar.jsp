@@ -7,18 +7,17 @@
 <%@page import="se.m1.utils.Constants"%>
 <!DOCTYPE html>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <% 
-                         String s=  (String)request.getSession().getAttribute("username");
-                         out.print("<a>Hello "+ s +" your session is Active! </a>");
-            %> 
-            <div class="collapse navbar-collapse">
-                <form action="Controller" method="GET">
-                    <input type="submit" class="btn btn-outline-secondary" name="action" value="Disconnect">
-                </form>
-            </div>
-    </nav>
-            
+<nav class="navbar navbar-light bg-light fixed-top">
+    <%
+        String s = (String) request.getSession().getAttribute("username");
+        out.print("<a>Hello " + s + " your session is Active! </a>");
+    %> 
+    <form action="Controller" method="GET">
+        <input type="submit" class="btn btn-outline-secondary" name="action" value="Disconnect">
+    </form>
+
+</nav>
+
 <%--
 
         <form action="Controller">
@@ -34,4 +33,4 @@
                  </div>
              </div>
         </form>
-     --%>
+--%>
