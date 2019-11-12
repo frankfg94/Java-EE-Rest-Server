@@ -4,7 +4,7 @@
 <c:set var="previousPageUrl" value="<%=Constants.JSP_GOODBYE_PAGE%>" scope="request" />
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/loginstyle.css" media="screen">

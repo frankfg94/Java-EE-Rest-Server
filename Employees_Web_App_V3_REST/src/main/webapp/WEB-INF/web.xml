@@ -5,23 +5,25 @@
             30
         </session-timeout>
     </session-config>
-    <!-- On fait ici appel aux servlets pour notre V1 -->
+    <!-- On fait ici appel au servlet pour notre V2 -->
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>se.m1.ctrl.Controller</servlet-class>
+
     </servlet>
     
-
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
-
+    <!-- Identifiants de connexion -->
 
     <welcome-file-list>
-        <welcome-file>
-        WEB-INF\\LoginPage.jsp
-        </welcome-file>
+        <welcome-file>Controller</welcome-file>
     </welcome-file-list>
-
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/Errors/404.html</location>
+    </error-page>
 </web-app>

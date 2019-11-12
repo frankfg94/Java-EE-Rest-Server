@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,12 +18,12 @@
         <title>Employees List</title>
     </head>
     <body>
+        <jsp:include page='Navbar.jsp'/>
         <c:if test="${not empty requestScope.errRadioButton}">
             <p style="color:red">${requestScope.errRadioButton}</p>
         </c:if> 
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
         <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME%>" />
-        <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
                 <h1> Employees List</h1>

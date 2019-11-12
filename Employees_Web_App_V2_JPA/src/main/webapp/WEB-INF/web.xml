@@ -9,14 +9,7 @@
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>se.m1.ctrl.Controller</servlet-class>
-        <init-param>
-            <param-name>passwordAdmin</param-name>
-            <param-value>admin</param-value>
-        </init-param>
-        <init-param>
-            <param-name>passwordEmp</param-name>
-            <param-value>empl</param-value>
-        </init-param>
+
     </servlet>
     
     <servlet-mapping>
@@ -24,17 +17,13 @@
         <url-pattern>/Controller</url-pattern>
     </servlet-mapping>
     <!-- Identifiants de connexion -->
-    <context-param>
-        <param-name>loginAdmin</param-name>
-        <param-value>admin</param-value>
-    </context-param>
-    
-    <context-param>
-        <param-name>loginEmp</param-name>
-        <param-value>empl</param-value>
-    </context-param>
-    
+
     <welcome-file-list>
         <welcome-file>Controller</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/Errors/404.html</location>
+    </error-page>
 </web-app>

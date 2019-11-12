@@ -18,35 +18,7 @@
             <param-value>empl</param-value>
         </init-param>
     </servlet>
-   <!-- 
-    <servlet>
-        <servlet-name>EmployeesListPageController</servlet-name>
-        <servlet-class>se.m1.ctrl.EmployeesListPageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EmployeesListPageController</servlet-name>
-        <url-pattern>/EmployeesListPageController</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>EmployeesDetailsPageController</servlet-name>
-        <servlet-class>se.m1.ctrl.EmployeesDetailsPageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EmployeesDetailsPageController</servlet-name>
-        <url-pattern>/EmployeesDetailsPageController</url-pattern>
-    </servlet-mapping>
-    
-     <servlet>
-        <servlet-name>NavbarController</servlet-name>
-        <servlet-class>se.m1.ctrl.NavbarController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>NavbarController</servlet-name>
-        <url-pattern>/NavbarController</url-pattern>
-    </servlet-mapping>
-
-    -->
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
@@ -68,4 +40,9 @@
     <welcome-file-list>
         <welcome-file>WEB-INF\\LoginPage.jsp</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/Errors/404.html</location>
+    </error-page>
 </web-app>

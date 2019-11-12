@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,8 +21,7 @@
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
 
-                <c:set var="empOld" value="${sessionScope.selEmployee}" />
-                <c:set var="emp" value="${empOld}" scope="request" />
+                <c:set var="emp" value="${sessionScope.selEmployee}" />
 
 
                 <c:choose>

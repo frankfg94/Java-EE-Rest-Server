@@ -37,6 +37,7 @@ public class Controller extends HttpServlet {
     @EJB
     public  EmployeesSB empSB;
     
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,8 +51,6 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
                  
         try {
-            
-
             // Premier lancement du programme
 
         String context = request.getParameter("action");
@@ -82,6 +81,10 @@ public class Controller extends HttpServlet {
                 //nouvelle exception not found
                 //page jsp not found
         }
+        }        
+        else
+        {
+            request.getRequestDispatcher(Constants.JSP_LOGIN_PAGE).forward(request, response);
         }
     }   catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
