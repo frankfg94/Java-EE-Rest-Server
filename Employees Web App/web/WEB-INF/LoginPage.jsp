@@ -14,20 +14,23 @@
             // Reinitialisation des paramètres
             request.setAttribute("isAdmin", false);
             request.setAttribute("state", "loginAttempt");
-
-            if (request.getAttribute("errKey") != null) {
-                out.print((String) request.getAttribute("errKey"));
-            }
         %>
         
         <div class="wrapper">
             <form class="form-signin" name ='myform' action='Controller'>
                 <h2 class="form-signin-heading text-center">Login</h2>
+                
                 <input type='text' class="form-control" name='loginField' placeholder="Login" autofocus="">
                 <input type='password' class="form-control" name='pwdField' placeholder="Password" autofocus="">
+                <%
+                    if (request.getAttribute("errKey") != null) {
+                    out.print((String) request.getAttribute("errKey"));
+                    out.print("<br/>");
+                    out.print("<br/>");
+                    }
+                %>
                 <input type='submit' class="btn btn-primary btn-block" name='action' value='Connect'>
             </form>
         </div>
-
     </body>
 </html>
