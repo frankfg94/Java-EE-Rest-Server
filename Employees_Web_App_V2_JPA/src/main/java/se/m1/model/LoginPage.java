@@ -19,17 +19,42 @@ import static se.m1.utils.Constants.*;
 
 public class LoginPage {
 
-    private DBActionsMySql dba;
+    /**
+     * The connected user bean
+     */
     private Users userInput;
-    private InputStream input;
+    
+    /**
+     * Information about the current db.properties file
+     */
+    private InputStream serverInfo;
+    
+    /**
+     * The connection identifiers
+     */
     private String dbUrl, dbUser, dbPwd;
+    
+    /**
+     * The EJBS that we retrieve from the servlet
+     */
     private UsersSB usersSB;
     private EmployeesSB empSB;
 
-    public void loginAttempt(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, UsersSB uSB)
+    /**
+     * Tries to connect the employee with the login page available data
+     * @param request
+     * @param response
+     * @param servlet
+     * @throws ServletException
+     * @throws IOException
+     * @throws NamingException 
+     */
+    public void loginAttempt(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet)
             throws ServletException, IOException, NamingException {
 
         InitialContext ic = new InitialContext();
+        
+        // We do a lookup to fetch the EJBs that were created in the controller servlet
         usersSB = (UsersSB) ic.lookup("java:global/Employees_Web_App_V2_JPA/UsersSB!se.m1.beans.UsersSB");
         empSB = (EmployeesSB) ic.lookup("java:global/Employees_Web_App_V2_JPA/EmployeesSB!se.m1.beans.EmployeesSB");
 
@@ -37,9 +62,6 @@ public class LoginPage {
         displayEmptyFieldsErrMsg(request, response);
 
         if (request.getAttribute("errKey") == null) {
-            if (dba == null) {
-                dba = new DBActionsMySql(dbUrl, dbUser, dbPwd);
-            }
 
             List<Users> dbUsers = usersSB.getAllUsers();
 
@@ -50,7 +72,7 @@ public class LoginPage {
 
             for (Users dbUs : dbUsers) {
                 if (dbUs.VerifyCredentials(userInput.getLogin(), userInput.getPwd())) {
-                    loadEmpsAndSaveToRequest(request);
+                    loadEmpsAndSaveToSession(request);
                     request.getSession().setAttribute("userBean", dbUs);
                     if (dbUs.getRole().equals("admin")) {
                         request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);
@@ -65,7 +87,11 @@ public class LoginPage {
         }
     }
 
-    void loadEmpsAndSaveToRequest(HttpServletRequest request) {
+    /**
+     * Query all the employees and then save the data to the session variable
+     * @param request 
+     */
+    void loadEmpsAndSaveToSession(HttpServletRequest request) {
         TreeMap<Integer, Employees> emps = empSB.getAllEmployeesDict();
         request.getSession().setAttribute("empList", emps);
         ArrayList<Integer> ints = new ArrayList<>();
@@ -73,6 +99,13 @@ public class LoginPage {
         request.getSession().setAttribute("empKeys", ints);
     }
 
+    /**
+     * Displays an error message if one the fields password or user is empty
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     void displayEmptyFieldsErrMsg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean connFieldEmpty = request.getParameter("loginField").equals("");
         boolean pwdFieldEmpty = request.getParameter("pwdField").equals("");
@@ -86,13 +119,18 @@ public class LoginPage {
         }
     }
 
+    /**
+     * Retrieves the username, the password and the url for the database connection
+     * @param servlet
+     * @throws IOException 
+     */
     public void initDBProps(HttpServlet servlet) throws IOException {
         Properties prop = new Properties();
-        input = servlet.getServletContext().getResourceAsStream(Constants.FILE_PROPERTIES_DB_PATH);
-        if (input == null) {
+        serverInfo = servlet.getServletContext().getResourceAsStream(Constants.FILE_PROPERTIES_DB_PATH);
+        if (serverInfo == null) {
             throw new NullPointerException("DB Properties file not found");
         }
-        prop.load(input);
+        prop.load(serverInfo);
         dbUrl = prop.getProperty("dbUrl");
         dbUser = prop.getProperty("dbUser");
         dbPwd = prop.getProperty("dbPwd");

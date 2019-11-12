@@ -15,10 +15,18 @@ public class EmployeesSB {
     @PersistenceContext
     EntityManager em;
 
+    /**
+     * Obtain all the employees from the Mysql Database
+     * @return 
+     */
     public List getAllEmployees() {
         return em.createNamedQuery("Employees.findAll").getResultList();
     }
 
+    /**
+     * Obtain all the employees but with a dictionnary, the keys are the employees ids
+     * @return 
+     */
     public TreeMap<Integer, Employees> getAllEmployeesDict() {
         TreeMap<Integer, Employees> tMap = new TreeMap<>();
         List<Employees> emps = em.createNamedQuery("Employees.findAll").getResultList();
@@ -28,6 +36,10 @@ public class EmployeesSB {
         return tMap;
     }
 
+    /**
+     * Add a new employee depending on the parameter emp (Employees)
+     * @param emp 
+     */
     public void AddEmployee(Employees emp) {
         try {
             if (emp != null) {
@@ -43,6 +55,10 @@ public class EmployeesSB {
         }
     }
 
+    /**
+     * Edit an employee depending on the parameter emp (Employees)
+     * @param selEmployee 
+     */
     public void EditEmployee(Employees selEmployee) {
         System.out.println("Start of edit");
         try {
@@ -55,6 +71,10 @@ public class EmployeesSB {
         System.out.println("Edit Successful");
     }
 
+    /**
+     * Remove the employee
+     * @param emp 
+     */
     public void RemoveEmployee(Employees emp) {
 
         if (!em.contains(emp)) {

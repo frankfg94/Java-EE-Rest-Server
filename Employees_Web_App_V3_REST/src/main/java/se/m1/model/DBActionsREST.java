@@ -46,7 +46,7 @@ public class DBActionsREST {
     private final EmployeesSB empSB;
 
     public DBActionsREST(String url, String user, String pwd) throws NamingException {
-        LOGGER.log(Level.INFO,"Starting in mode REST : " + REST_ONLY);
+        LOGGER.log(Level.INFO, "Starting in mode REST : {0}", REST_ONLY);
         empSB = (EmployeesSB)new InitialContext().lookup("java:global/Employees_Web_App_V3_REST/EmployeesSB!se.m1.beans.EmployeesSB");
     }
 
@@ -74,9 +74,9 @@ public class DBActionsREST {
 
     private TreeMap<Integer, Employees> getTreeMapFromList(List<Employees> emps) {
         TreeMap<Integer, Employees> tm = new TreeMap<>();
-        for (Employees e : emps) {
+        emps.forEach((e) -> {
             tm.put(e.getId(), e);
-        }
+        });
         return tm;
     }
     

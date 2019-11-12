@@ -26,7 +26,6 @@ public class Controller extends HttpServlet {
     @EJB
     private EmployeesSB empSB;
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -92,7 +91,7 @@ public class Controller extends HttpServlet {
             System.out.println("Command: " + context);
             switch (context) {
                 case "Connect": //post
-                    new LoginPage().loginAttempt(request, response, this, usersSB);
+                    new LoginPage().loginAttempt(request, response, this);
                     break;
                 case "Delete"://post
                     new EmployeesListPage().deleteEmployee(request, response);

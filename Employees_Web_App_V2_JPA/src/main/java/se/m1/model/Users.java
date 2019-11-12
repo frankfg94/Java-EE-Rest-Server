@@ -116,6 +116,12 @@ public class Users implements Serializable {
         return "se.m1.beans.Users[ id=" + id + " ]";
     }
 
+    /**
+     * Returns true if the entered credentials are matching this user's login and password
+     * @param login
+     * @param pwd
+     * @return 
+     */
     public boolean VerifyCredentials(String login, String pwd) {
         return this.login.equals(login) && this.pwd.equals(pwd);
     }

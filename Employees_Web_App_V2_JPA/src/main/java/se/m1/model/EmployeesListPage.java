@@ -24,6 +24,13 @@ public class EmployeesListPage {
         
     }
 
+    /**
+     * Delete the employee corresponding to the variable selEmployeeId
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     public void deleteEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         employees = (TreeMap<Integer, Employees>) request.getSession().getAttribute("empList");
         System.out.println("Delete button clicked " + request.getParameter(Constants.RADIO_EMPLOYEES_LIST_NAME));
@@ -53,6 +60,13 @@ public class EmployeesListPage {
         }
     }
 
+    /**
+     * Obtain the details from the currently selected employee and display them in the employees details page
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     public void employeeDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("empList") != null)
             employees = (TreeMap<Integer, Employees>) request.getSession().getAttribute("empList");
@@ -90,6 +104,13 @@ public class EmployeesListPage {
         }
     }
 
+    /**
+     * Redirect to a new page Employee creation page while setting the selected employee to null
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     public void addEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Retrieve data
         employees = (TreeMap<Integer, Employees>) request.getSession().getAttribute("empList");
