@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import se.m1.utils.Constants;
 
 public class EmployeesDetailsPage {
-
+    
+    /**
+     * User bean de l'input
+     */
     User userInput;
     InputStream input;
 

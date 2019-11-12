@@ -49,7 +49,7 @@ public class LoginPage {
             ServletContext ctx = request.getServletContext();
             ServletConfig conf = servlet.getServletConfig();
 
-            // Obtenu via le fichier web.xml
+            // Obtained with the file web.xml
             String loginAdminCtx = ctx.getInitParameter("loginAdmin");
             String pwdAdminCtx = conf.getInitParameter("passwordAdmin");
 
