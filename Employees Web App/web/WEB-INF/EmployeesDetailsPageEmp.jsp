@@ -31,7 +31,7 @@
                 Employee emp = (Employee)request.getAttribute("selEmployee");                
                 request.getSession().setAttribute("selEmployee", emp);
 
-                      out.print("<h2>Details of Employee : " +  emp.getFirstname()+  " " + emp.getName()+ "</h2>");
+                    out.print("<h1>Details of Employee : " +  emp.getFirstname()+  " " + emp.getName()+ "</h1><br/>");
                     out.print("<h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getName()+"'/>");
                     out.print("<br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstName' maxlength='10' style='display:inline-block' type='text' value='"+emp.getFirstname()+"'/>");
                     out.print("<br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control'  name='empHomePhone' maxlength='10' style='display:inline-block' type='text' value='"+emp.getHomePhone()+"'/>");

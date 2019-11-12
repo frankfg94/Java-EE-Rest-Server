@@ -27,7 +27,7 @@
             <jsp:include page='Navbar.jsp'/>
             <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
-             <h1> Employees List</h1>
+             <h1>Employees List</h1><br/>
             <%
                 request.setAttribute("state", "AdminListPage");
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");

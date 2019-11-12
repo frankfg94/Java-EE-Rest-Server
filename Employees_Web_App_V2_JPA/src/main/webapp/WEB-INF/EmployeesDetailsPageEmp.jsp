@@ -23,9 +23,9 @@
         <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
-                <c:set var="emp" value="${sessionScope.selEmployee}" />
+                <c:set var="emp" value="${sessionScope.selEmployee}"/>
 
-                <h2>Details of Employee  ${emp.getFirstname()}   ${emp.getName()} </h2>
+                <h1>Details of Employee  ${emp.getFirstname()}   ${emp.getName()}</h1><br/>
                 <h3 style='display:inline-block; margin-right:10px'>Name</h3><input class='form-control' name='empName' style='display:inline-block' type='text' value="${emp.getName()}" readonly/>
                 <br/><h3 style='display:inline-block; margin-right:10px'>First Name</h3><input class='form-control' name='empFirstname' style='display:inline-block' type='text' value="${emp.getFirstname()}" readonly/>
                 <br/><h3 style='display:inline-block; margin-right:10px'>Home Phone</h3><input class='form-control' name='empTelhome' style='display:inline-block' type='text' value="${emp.getTelhome()}" readonly/>

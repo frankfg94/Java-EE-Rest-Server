@@ -27,10 +27,9 @@
         <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
         <form class="form-signin" action="Controller">
-             <h1> Employees List</h1><br/>
+             <h1>Employees List</h1><br/>
             <%
                 TreeMap<Integer,Employee> employees = (TreeMap<Integer,Employee>)session.getAttribute("empList");
-                out.print("<h2>Employees List (Read Only)</h2>");
                 out.print("<table class='table table-striped table bordered'>");
                 out.print("<tr>");
                     out.print("<td>Sél</td>");

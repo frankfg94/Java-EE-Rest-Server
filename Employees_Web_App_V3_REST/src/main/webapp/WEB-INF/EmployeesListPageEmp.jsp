@@ -26,7 +26,7 @@
         <jsp:include page='Navbar.jsp'/>
         <div class="wrapper">
             <form class="form-signin" action="Controller" method="POST">
-                <h1> Employees List (Read Only) </h1>
+                <h1>Employees List</h1><br/>
                 <c:set var="employees" value="${sessionScope.empList}"  />
                 <c:choose>
                     <c:when test="${not empty employees && employees.size() != 0}">
