@@ -3,12 +3,8 @@ package se.m1.ctrl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import se.m1.model.DBActions;
 import se.m1.model.*;
 import se.m1.model.User;
-import se.m1.utils.Constants;
-import static se.m1.utils.Constants.*;
 
 public class Controller extends HttpServlet {
 

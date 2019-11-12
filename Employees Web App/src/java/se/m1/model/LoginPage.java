@@ -22,9 +22,6 @@ public class LoginPage {
     String dbUser = "";
     String dbPwd = "";
 
-    public LoginPage() {
-    }
-
     public void loginAttempt(HttpServletRequest request, HttpServletResponse response, GenericServlet servlet)
             throws ServletException, IOException, SQLException {
 
@@ -63,13 +60,10 @@ public class LoginPage {
             userInput = new User();
             userInput.setLogin(request.getParameter(FRM_LOGIN_FIELD));
             userInput.setPwd(request.getParameter(FRM_PWD_FIELD));
-
-            //if (dba.checkCredentials(userInput)) {
+            
             request.getSession().setAttribute("username", userInput.getLogin());
-
-            // NULL REFERENCE EXCEPTION POUR L'INSTANT
             request.setAttribute("previousPageUrl", Constants.JSP_LOGIN_PAGE);
-            if (loginAdminCtx.equals(userInput.getLogin()) && pwdAdminCtx.equals(userInput.getPwd())) {
+            if (loginAdminCtx.equals(userInput.getLogin()) && pwdAdminCtx.equals(userInput.getPwd())) {     
                 request.getSession().setAttribute("empList", dba.getEmployees());
                 request.getSession().setAttribute("isAdmin", true);
                 request.getRequestDispatcher(JSP_EMPLOYEESLIST_PAGE).forward(request, response);

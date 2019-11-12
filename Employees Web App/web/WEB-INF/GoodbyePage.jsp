@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <script type="text/javascript">
-        function redirect(elem){
-        elem.setAttribute("action","LoginPage.jsp");
+    function redirect(elem) {
+        elem.setAttribute("action", "LoginPage.jsp");
         elem.submit();
-}
+    }
 </script>
 
 <!DOCTYPE html>

@@ -12,11 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static se.m1.utils.Constants.*;
 
-/**
- *
- * @author JAA
- */
-public class DBActions {
+public class DBActions {        //class that handles the link between the DB and the program
 
     Connection conn;
     Statement stmt;
@@ -124,7 +120,7 @@ public class DBActions {
 
         try {
 
-            // Prepared statements augmentent la sécurité
+            // Prepared statements to improve security
             String query = "DELETE FROM EMPLOYEES WHERE ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -140,7 +136,7 @@ public class DBActions {
 
         try {
 
-            // Prepared statements augmentent la sécurité
+            // Prepared statements to improve security
             String query = "UPDATE EMPLOYEES  SET NAME = ?, FIRSTNAME = ?, TELHOME = ?, TELMOB = ?, TELPRO = ?, ADRESS  = ?, POSTALCODE = ?, CITY = ?, EMAIL = ? WHERE ID = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString(1, emp.getName());
