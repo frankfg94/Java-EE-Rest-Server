@@ -14,16 +14,18 @@
     </head>
     <body>
 
-        <c:if test="${not empty requestScope.errKey}">
-            <p style="color:red">${requestScope.errKey}</p>
-        </c:if> 
+
         <div class="wrapper">
             <form class="form-signin" name ='myform' action='Controller' method="POST">
                 <h2 class="form-signin-heading text-center">Login</h2>
                 <input type='text' class="form-control" name='loginField' placeholder="Login" autofocus="">
                 <input type='password' class="form-control" name='pwdField' placeholder="Password" autofocus="">
+                <c:if test="${not empty requestScope.errKey}">
+                    <p style="color:red">${requestScope.errKey}</p>
+                </c:if>
                 <input type='submit' class="btn btn-primary btn-block" name='action' value='Connect'>
             </form>
         </div>
     </body>
 </html>
+
