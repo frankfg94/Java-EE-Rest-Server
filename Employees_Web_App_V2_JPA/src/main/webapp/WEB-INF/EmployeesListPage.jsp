@@ -19,9 +19,6 @@
     </head>
     <body>
         <jsp:include page='Navbar.jsp'/>
-        <c:if test="${not empty requestScope.errRadioButton}">
-            <p style="color:red">${requestScope.errRadioButton}</p>
-        </c:if> 
         <!-- Pour le moment je triche un peu, j'utilise une pince de scriplet afin de pouvoir accéder à une variable statique, faute de moyens en JSTL -->
         <c:set var="radioName" value="<%=Constants.RADIO_EMPLOYEES_LIST_NAME%>" />
         <div class="wrapper">
@@ -69,16 +66,16 @@
                             </c:forEach>
 
                         </table>
-                        <br/>
+                        <c:if test="${not empty requestScope.errRadioButton}">
+                            <p style="color:red">${requestScope.errRadioButton}</p>
+                        </c:if> 
                         <input class='btn btn-primary' type='submit' value='Delete'  name='action'/>
                         <input class='btn btn-primary' type='submit' value='Details' name='action'/>
-
                     </c:when>
                     <c:otherwise>
                         <h2 style='color:red;'>The company doesn't have employees!</h2>
                     </c:otherwise>
                 </c:choose>
-
                 <input class='btn btn-primary' type='submit' value='Add' formmethod="GET" name='action'/>
             </form>
         </div>
