@@ -2,23 +2,31 @@ Marine Chauveau
 François Gillioen
 Marc Guicheau
 
-
+Enseignant : Monsieur Augustin Jacques
 ---------------------------------------------------------------------------------------------------
-README File
+
+  _____                     _          _      __          __         _              _   ______   ______   
+ |  __ \                   (_)        | |     \ \        / /        | |            | | |  ____| |  ____|  
+ | |__) |  _ __    ___      _    ___  | |_     \ \  /\  / /    ___  | |__          | | | |__    | |__     
+ |  ___/  | '__|  / _ \    | |  / _ \ | __|     \ \/  \/ /    / _ \ | '_ \     _   | | |  __|   |  __|    
+ | |      | |    | (_) |   | | |  __/ | |_       \  /\  /    |  __/ | |_) |   | |__| | | |____  | |____   
+ |_|      |_|     \___/    | |  \___|  \__|       \/  \/      \___| |_.__/     \____/  |______| |______|  
+                          _/ |                                                                            
+                         |__/                                                                             
+
 
 ################################# Lien du projet ####################################
 https://gitlab.com/Doratik/jee---employees-management-application
 
+############### Comment configurer la V2 ################################
 
-################################ Etat du rendu ########################################
+S'assurer que une application type xampp/wamp est installé avec Mysql, activer apache et mysql
 
-V1 : Full
-V2 : Full, exceptions management, page not found error management
-V3 : Sonarqube (external install and server logs) along with Junit (getters setters + EJBs support),
-Restful application. Sonarqube code recommendations were followed.
+################ Comment configurer la V3 ############################################
 
-################Activer les tests junit de la V3 sur les ejbs ############################################
 
+ETAPE 1 : Configurer Junit pour tester les EJBs
+--------------------------------------------------
 Le serveur embedded situé dans test dependencies ne possède pas les ressources pour pouvoir se
 connecter à mysql à distance, pour cela : 
 
@@ -28,42 +36,46 @@ connecter à mysql à distance, pour cela :
 et remplacer le fichier domain.xml existant avec le fichier domain fourni(à la racine du projet Employees_Web_App_V3_REST) pour que les tests utilisent mysql et les bons connexion pool
 (winrar est conseillé pour ouvrir l'archive glassfish-embedded-all-3.1.1.jar) 
 
-########################## Activer la V3 REST ############################
+ETAPE 2 : Ajout de la ressource glassfish au serveur glassfish
+--------------------------------------------------------------
 
-Ajout de la ressource glassfish au serveur glassfish
-----------------------------------------------------
+3) Enfin, pour activer la V3 en ajoutant les resources nécéssaires à notre serveur
+
 La resource glassfish-resources.xml est déjà créee dans WEB-INF, il suffit de l'ajouter au serveur, pour cela: 
 
-a) Cliquer sur Services --> Servers --> GlassFish Server
-Si le serveur est éteint : Démarrer le serveur glassfish avec clic droit -> Start
-b) Glassfish Server  --> View Domain Admin Console
+    a) Dans Netbeans, cliquer sur Services --> Servers --> GlassFish Server
+       Si le serveur est éteint : Démarrer le serveur glassfish avec clic droit -> Start
 
-c) Vous arrivez sur une page d'administration, dans l'onglet à gauche cliquer sur 'Resources' --> 'Add Resources'
-Location XML File to be Uploaded to the server --> cliquer sur Browse
-d) Indiquer le chemin du fichier glassfish-resources.xml se trouvant dans WEB-INF puis cliquer sur ok
+    b) Glassfish Server  --> View Domain Admin Console
 
-Test facultatif de la connexion à distance : retourner dans resources->JDBC->connection pools cliquer sur Az_connectionPool et sur 'ping'
+    c) Vous arrivez sur une page d'administration, dans l'onglet à gauche 
+       cliquer sur 'Resources' --> 'Add Resources'
+       à droite du champs 'Location XML File to be Uploaded to the server' --> cliquer sur Browse
+
+    d) Indiquer le chemin du fichier glassfish-resources.xml se trouvant dans WEB-INF puis cliquer sur ok
+
+Test facultatif de la connexion à distance (pour vérifier que tout a été fait correctement)
+	 retourner dans resources->JDBC->connection pools cliquer sur Az_connectionPool et sur 'ping'
+
+###################################### Autres ##############################################################
 
 
-##################################### Utiliser sonarqube avec le projet ###########################
-S'assurer que Maven 3+ est installé 
-Démarrer le serveur en cliquant ici -->  (Chemin que vous avez choisi d'extraire sonarqube)\sonarqube-8.0\bin\windows-x86-64\StartSonar.bat
-taper mvn sonar:sonar
+
+Utiliser sonarqube avec le projet
+	1) S'assurer que Maven 3+ est installé avec JDK 11
+	2) Installer sonarqube-8.0 sur votre ordinateur
+	3) Démarrer le serveur en cliquant ici -->  (Chemin que vous avez choisi d'extraire sonarqube)\sonarqube-8.0\bin\windows-x86-64\StartSonar.bat
+	4) taper mvn sonar:sonar dans le répertoire du projet V1 V2 ou V3 de votre choix pour démarrer le scan
 
 
-################################## Facultatif : tester la connexion à distance pour la V3 ###########
- Créer une nouvelle connexion mysql (version 5.1.X mais  pas 8+) dans services->databases(FACULTATIF)
------------------------------------------------------------------------------------------------------
+
+Facultatif : tester la connexion Mysql sur le cloud pour la V3
+	Dans Netbeans, créer une nouvelle connexion mysql (version 5.1.X mais  pas 8+) dans services->databases(FACULTATIF)
+	
 On utilise les données suivantes
-Host : jeeprj.mysql.database.azure.com
-Port : 3306
-Username : jee@jeeprj
-Password : Marechaldu94 
-Database : jeeprj
-
-URL : jdbc:mysql://jeeprj.mysql.database.azure.com:3306/jeeprj?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&amp;serverTimezone=UTC
-
-############################################   Utilisations externes ########################
-sonarqube 8.0 with JDK 11 and not JDK 13
-Maven 3+
-MySql
+	Host : jeeprj.mysql.database.azure.com
+	Port : 3306
+	Username : jee@jeeprj
+	Password : Marechaldu94 
+	Database : jeeprj
+	URL : jdbc:mysql://jeeprj.mysql.database.azure.com:3306/jeeprj?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&amp;serverTimezone=UTC
